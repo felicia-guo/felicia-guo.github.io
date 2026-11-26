@@ -289,16 +289,16 @@
     }
     .proof strong { color: var(--ink); }
 
-    /* Interactive Exploded Diagram Figure */
-    .hero-fig {
+    /* Hero Profile / Snapshot Card */
+    .hero-card {
       margin: 0;
       background: var(--paper);
       border: 1px solid var(--rule);
       border-radius: var(--radius);
-      padding: 20px 20px 18px;
+      overflow: hidden;
       box-shadow: 0 12px 28px rgba(14, 27, 42, 0.06);
     }
-    .fig-header {
+    .hero-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -307,101 +307,47 @@
       color: var(--steel);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      padding-bottom: 10px;
-      margin-bottom: 10px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--rule-light);
+      background: var(--white);
+    }
+    .hero-photo {
+      aspect-ratio: 4 / 3;
+      cursor: default;
       border-bottom: 1px solid var(--rule-light);
     }
-    .exploded {
-      width: 100%;
-      max-height: 360px;
-      margin: 0 auto;
-      color: var(--ink);
-    }
-    .exploded .part {
-      cursor: pointer;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .exploded .part .solid {
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-      animation: drawStroke 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    .exploded .later {
-      opacity: 0;
-      animation: fadeIn 0.5s ease 0.75s forwards;
-    }
-    .exploded .callout-group { cursor: pointer; }
-    .exploded.has-active .part { opacity: 0.28; }
-    .exploded.has-active .part.active { opacity: 1; }
-    .exploded.has-active .part.active .solid { stroke: var(--red); stroke-width: 2.2; }
-
-    @keyframes drawStroke {
-      to { stroke-dashoffset: 0; }
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .exploded .part .solid { stroke-dashoffset: 0; animation: none; }
-      .exploded .later { opacity: 1; animation: none; }
-    }
-
-    .hero-fig figcaption {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--rule-light);
-      font-size: 0.82rem;
-      color: var(--steel);
-    }
-    .parts-list {
-      list-style: none;
-      margin: 0 0 10px;
-      padding: 0;
+    .hero-specs {
+      padding: 18px 20px 20px;
       display: grid;
-      gap: 6px;
+      gap: 12px;
+      margin: 0;
     }
-    .parts-list button {
-      width: 100%;
-      text-align: left;
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      padding: 5px 8px;
-      font-family: var(--text);
-      font-size: 0.83rem;
-      color: var(--ink);
-      cursor: pointer;
+    .hero-specs div {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.15s ease, border-color 0.15s ease;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule-light);
     }
-    .parts-list button:hover,
-    .parts-list button.active {
-      background: rgba(196, 43, 34, 0.08);
-      border-color: rgba(196, 43, 34, 0.35);
+    .hero-specs div:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
     }
-    .part-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1.5px solid var(--red);
-      color: var(--red-ink);
+    .hero-specs dt {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--steel);
       flex-shrink: 0;
     }
-    .part-note {
-      font-family: var(--mono);
-      font-size: 0.74rem;
-      color: var(--steel);
-      min-height: 2.6em;
+    .hero-specs dd {
       margin: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: right;
     }
 
     /* Bands */
@@ -926,89 +872,21 @@
           </ul>
         </div>
 
-        <figure class="hero-fig">
-          <div class="fig-header">
-            <span>FIG 01 // XPRIZE WATER PAYLOAD</span>
-            <span>EXPLODED VIEW</span>
+        <aside class="hero-card" aria-label="Engineering snapshot">
+          <div class="hero-card-header">
+            <span>PROFILE // HARDWARE &amp; ROBOTICS</span>
+            <span>CMU &rsquo;30</span>
           </div>
-          <svg class="exploded" id="explodedSvg" viewBox="-103.5 -381.5 277 441.9" role="img" aria-labelledby="exploded-title exploded-desc" xmlns="http://www.w3.org/2000/svg">
-            <title id="exploded-title">Exploded view of a water payload</title>
-            <desc id="exploded-desc">Interactive exploded view of three parts stacked on a centerline: a foam proportioner, a hexagonal-prism water tank, and a magnetic tubing coupling.</desc>
-
-            <g class="part" data-part="coupling" tabindex="0" aria-label="Part 3: Magnetic tubing coupling">
-              <path class="solid" pathLength="1" d="M-31.8 -24 A31.8 18.4 0 1 0 31.8 -24 A31.8 18.4 0 1 0 -31.8 -24 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-31.8 -24 L-31.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M31.8 -24 L31.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-31.8 0 A31.8 18.4 0 0 0 31.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-17.1 -24 A17.1 9.9 0 1 0 17.1 -24 A17.1 9.9 0 1 0 -17.1 -24 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <g class="later">
-                <path d="M-31.8 0 A31.8 18.4 0 0 1 31.8 0" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
-              </g>
-            </g>
-
-            <g class="part" data-part="tank" tabindex="0" aria-label="Part 2: Hexagonal-prism water tank">
-              <path class="solid" pathLength="1" d="M36.7 -152.4 L-36.7 -152.4 L-73.5 -189.1 L-36.7 -225.9 L36.7 -225.9 L73.5 -189.1 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M36.7 -152.4 L36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M36.7 -72.4 L-36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-36.7 -152.4 L-36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-36.7 -72.4 L-73.5 -109.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-73.5 -189.1 L-73.5 -109.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M73.5 -189.1 L73.5 -109.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M73.5 -109.1 L36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <g class="later">
-                <path d="M-73.5 -109.1 L-36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
-                <path d="M-36.7 -225.9 L-36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
-                <path d="M-36.7 -145.9 L36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
-                <path d="M36.7 -225.9 L36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
-                <path d="M36.7 -145.9 L73.5 -109.1" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
-              </g>
-            </g>
-
-            <g class="part" data-part="prop" tabindex="0" aria-label="Part 1: Foam proportioner">
-              <path class="solid" pathLength="1" d="M-34.3 -319.7 A34.3 19.8 0 1 0 34.3 -319.7 A34.3 19.8 0 1 0 -34.3 -319.7 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-34.3 -319.7 L-34.3 -275.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M34.3 -319.7 L34.3 -275.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="solid" pathLength="1" d="M-34.3 -275.7 A34.3 19.8 0 0 0 34.3 -275.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-              <g class="later">
-                <path d="M-34.3 -275.7 A34.3 19.8 0 0 1 34.3 -275.7" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
-              </g>
-            </g>
-
-            <g class="later">
-              <path d="M0 -353.5 L0 32.4" stroke="#4A5866" stroke-width="1.1" stroke-dasharray="14 3 2 3" fill="none"/>
-            </g>
-
-            <g class="later">
-              <g class="callout-group" data-part="prop">
-                <path d="M34.3 -297.7 L112.5 -297.7" stroke="#C42B22" stroke-width="1.2" fill="none"/>
-                <circle cx="34.3" cy="-297.7" r="2.2" fill="#C42B22"/>
-                <circle cx="125.5" cy="-297.7" r="12.5" fill="#F6F7F8" stroke="#C42B22" stroke-width="1.4"/>
-                <text x="125.5" y="-293.1" text-anchor="middle" font-size="13" font-weight="700" fill="#C42B22" font-family="Arial, sans-serif">1</text>
-              </g>
-              <g class="callout-group" data-part="tank">
-                <path d="M73.5 -149.1 L112.5 -149.1" stroke="#C42B22" stroke-width="1.2" fill="none"/>
-                <circle cx="73.5" cy="-149.1" r="2.2" fill="#C42B22"/>
-                <circle cx="125.5" cy="-149.1" r="12.5" fill="#F6F7F8" stroke="#C42B22" stroke-width="1.4"/>
-                <text x="125.5" y="-144.5" text-anchor="middle" font-size="13" font-weight="700" fill="#C42B22" font-family="Arial, sans-serif">2</text>
-              </g>
-              <g class="callout-group" data-part="coupling">
-                <path d="M31.8 -12 L112.5 -12" stroke="#C42B22" stroke-width="1.2" fill="none"/>
-                <circle cx="31.8" cy="-12" r="2.2" fill="#C42B22"/>
-                <circle cx="125.5" cy="-12" r="12.5" fill="#F6F7F8" stroke="#C42B22" stroke-width="1.4"/>
-                <text x="125.5" y="-7.4" text-anchor="middle" font-size="13" font-weight="700" fill="#C42B22" font-family="Arial, sans-serif">3</text>
-              </g>
-            </g>
-          </svg>
-
-          <figcaption>
-            <div class="parts-list" id="partControls">
-              <button type="button" data-part="prop"><span class="part-num">1</span> Foam proportioner</button>
-              <button type="button" data-part="tank"><span class="part-num">2</span> Hexagonal-prism water tank</button>
-              <button type="button" data-part="coupling"><span class="part-num">3</span> Magnetic tubing coupling</button>
-            </div>
-            <p class="part-note" id="partNote">Hover or select a component to inspect the Tarot X6 water payload assembly.</p>
-          </figcaption>
-        </figure>
+          <div class="shot-frame hero-photo" data-label="Add photo: assets/img/hero-photo.jpg (headshot or favorite build)">
+            <img src="assets/img/hero-photo.jpg" alt="Felicia Guo with engineering hardware" onerror="this.remove()">
+          </div>
+          <dl class="hero-specs">
+            <div><dt>Current Labs</dt><dd>Airlab &middot; Moon Miners &middot; TartanAUV</dd></div>
+            <div><dt>Focus Areas</dt><dd>Drones, Rovers, Spaceflight &amp; Sensors</dd></div>
+            <div><dt>Location</dt><dd>Pittsburgh, PA / San Jose, CA</dd></div>
+            <div><dt>Availability</dt><dd>Summer 2027 Internship (US Citizen)</dd></div>
+          </dl>
+        </aside>
       </div>
     </header>
 
@@ -1353,40 +1231,7 @@
   </div>
 
   <script>
-    // 1. Interactive Exploded Diagram Callouts
-    const partDescriptions = {
-      prop: "1. Foam Proportioner — Mixes water with fire-suppressant concentrate before dispersal.",
-      tank: "2. Hexagonal-Prism Water Tank — Custom in-house 3D-printed & machined tank sized for the Tarot X6 airframe.",
-      coupling: "3. Magnetic Tubing Coupling — Self-aligning magnetic interface enabling rapid ground-station refills."
-    };
-    const svgEl = document.getElementById("explodedSvg");
-    const partNote = document.getElementById("partNote");
-    const partBtns = document.querySelectorAll("#partControls button");
-    const svgParts = document.querySelectorAll("#explodedSvg .part");
-    const callouts = document.querySelectorAll("#explodedSvg .callout-group");
-
-    function setActivePart(partId) {
-      if (!partId) {
-        svgEl.classList.remove("has-active");
-        svgParts.forEach(p => p.classList.remove("active"));
-        partBtns.forEach(b => b.classList.remove("active"));
-        partNote.textContent = "Hover or select a component to inspect the Tarot X6 water payload assembly.";
-        return;
-      }
-      svgEl.classList.add("has-active");
-      svgParts.forEach(p => p.classList.toggle("active", p.dataset.part === partId));
-      partBtns.forEach(b => b.classList.toggle("active", b.dataset.part === partId));
-      partNote.textContent = partDescriptions[partId] || "";
-    }
-
-    [...partBtns, ...svgParts, ...callouts].forEach(el => {
-      el.addEventListener("mouseenter", () => setActivePart(el.dataset.part));
-      el.addEventListener("focus", () => setActivePart(el.dataset.part));
-      el.addEventListener("click", () => setActivePart(el.dataset.part));
-    });
-    document.querySelector(".hero-fig").addEventListener("mouseleave", () => setActivePart(null));
-
-    // 2. Project Category Filtering
+    // 1. Project Category Filtering
     const filterBtns = document.querySelectorAll(".filter-btn");
     const projectCards = document.querySelectorAll(".project");
     filterBtns.forEach(btn => {
@@ -1402,7 +1247,7 @@
       });
     });
 
-    // 3. Copy Email Button
+    // 2. Copy Email Button
     const copyBtn = document.getElementById("copyEmailBtn");
     copyBtn.addEventListener("click", async () => {
       try {
@@ -1414,7 +1259,7 @@
       }
     });
 
-    // 4. Case Study Modal Data & Controller
+    // 3. Case Study Modal Data & Controller
     const caseStudies = {
       xprize: {
         kicker: "XPRIZE Wildfire Competition // 2024 – 2026",
