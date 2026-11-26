@@ -1,561 +1,1665 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Felicia Guo | Mechanical Engineering & Robotics Portfolio</title>
-  <meta name="description" content="Engineering portfolio of Felicia Guo — Mechanical Engineering & Robotics at Carnegie Mellon University. Drones, Lunar Rovers, ISS Microgravity Payloads, and AUVs." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Felicia Guo | Mechanical Engineering &amp; Robotics Portfolio</title>
+  <meta name="description" content="Felicia Guo is a Mechanical Engineering student (Robotics minor) at Carnegie Mellon University designing and building drones, rovers, and spaceflight hardware.">
+  <meta property="og:title" content="Felicia Guo | Mechanical Engineering Portfolio">
+  <meta property="og:description" content="XPRIZE Wildfire finalist, two experiments launched to the ISS, CMU Moon Miners, Airlab, and TartanAUV.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#e3e7ea">
+  <!-- Inline SVG Favicon (no extra file needed) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230e1b2a'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Arial Narrow, sans-serif' font-weight='900' font-size='34' fill='%23f6f7f8'%3EFG%3C/text%3E%3Crect x='12' y='50' width='40' height='4' fill='%23c42b22'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            cmu: '#C41230',
-            slatebg: '#0B1120',
-            cardbg: '#111827',
-          }
-        }
+  <link href="https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       Felicia Guo — Mechanical Engineering & Robotics Portfolio
+       Self-contained single-file HTML/CSS/JS for GitHub Pages
+       Palette: Bare Aluminium (#e3e7ea), Paper (#f6f7f8), Deep Navy (#0e1b2a),
+                Steel (#4a5866), Fire-Retardant Red (#c42b22 / #a8221a)
+       ========================================================================== */
+    :root {
+      --alu: #e3e7ea;
+      --alu-deep: #d4dbe0;
+      --paper: #f6f7f8;
+      --white: #ffffff;
+      --ink: #0e1b2a;
+      --steel: #4a5866;
+      --rule: #b4bdc6;
+      --rule-light: #d5dce2;
+      --red: #c42b22;
+      --red-ink: #a8221a;
+      --red-light: #ff8f80;
+
+      --display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+      --text: "B612", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      --wrap: 1140px;
+      --gutter: clamp(20px, 4vw, 40px);
+      --radius: 4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+
+    body {
+      margin: 0;
+      background: var(--alu);
+      color: var(--ink);
+      font-family: var(--text);
+      font-size: 0.98rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    img, svg { display: block; max-width: 100%; }
+
+    a {
+      color: inherit;
+      text-decoration-color: var(--red);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      transition: color 0.15s ease, text-underline-offset 0.15s ease;
+    }
+    a:hover { text-underline-offset: 5px; color: var(--red-ink); }
+
+    :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+    .skip {
+      position: absolute; left: 12px; top: -60px; z-index: 100;
+      background: var(--ink); color: var(--paper); padding: 10px 16px;
+      text-decoration: none; font-weight: 700;
+    }
+    .skip:focus { top: 12px; }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--wrap);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: var(--display);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: 0.01em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(4.2rem, 11vw, 8.2rem);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      line-height: 0.88;
+    }
+    h2 { font-size: clamp(2.4rem, 4.8vw, 3.4rem); }
+    h3 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); line-height: 1.04; }
+    p { margin: 0 0 1em; max-width: 65ch; }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(227, 231, 234, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      gap: 16px;
+    }
+    .brand {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 1.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: var(--red);
+      display: inline-block;
+    }
+    .brand:hover { color: var(--ink); }
+
+    .nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2.2vw, 28px);
+      flex-wrap: wrap;
+    }
+    .nav li a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav li a:hover { color: var(--red-ink); }
+    .nav .nav-cta {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--ink);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav .nav-cta:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: clamp(42px, 6vw, 76px) 0 clamp(48px, 6vw, 80px);
+      border-bottom: 1px solid var(--rule);
+      background-image:
+        linear-gradient(to right, rgba(14, 27, 42, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(14, 27, 42, 0.035) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.85fr);
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--steel);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 3px rgba(196, 43, 34, 0.18);
+    }
+    .lede {
+      font-size: clamp(1.08rem, 1.8vw, 1.25rem);
+      line-height: 1.55;
+      margin: 18px 0 12px;
+      color: var(--ink);
+    }
+    .seeking {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--red-ink);
+      background: rgba(196, 43, 34, 0.09);
+      border-left: 3px solid var(--red);
+      padding: 6px 12px;
+      margin-bottom: 24px;
+    }
+
+    /* Buttons */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 30px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-family: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--ink);
+      color: var(--paper);
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease;
+    }
+    .btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+    .btn-line {
+      background: transparent;
+      color: var(--ink);
+    }
+    .btn-line:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    /* Proof Bullets */
+    .proof {
+      list-style: none;
+      margin: 0;
+      padding: 20px 0 0;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      gap: 10px;
+    }
+    .proof li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.92rem;
+      color: var(--steel);
+    }
+    .proof li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .proof strong { color: var(--ink); }
+
+    /* Interactive Exploded Diagram Figure */
+    .hero-fig {
+      margin: 0;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 20px 20px 18px;
+      box-shadow: 0 12px 28px rgba(14, 27, 42, 0.06);
+    }
+    .fig-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--steel);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--rule-light);
+    }
+    .exploded {
+      width: 100%;
+      max-height: 360px;
+      margin: 0 auto;
+      color: var(--ink);
+    }
+    .exploded .part {
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .exploded .part .solid {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: drawStroke 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .exploded .later {
+      opacity: 0;
+      animation: fadeIn 0.5s ease 0.75s forwards;
+    }
+    .exploded .callout-group { cursor: pointer; }
+    .exploded.has-active .part { opacity: 0.28; }
+    .exploded.has-active .part.active { opacity: 1; }
+    .exploded.has-active .part.active .solid { stroke: var(--red); stroke-width: 2.2; }
+
+    @keyframes drawStroke {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .exploded .part .solid { stroke-dashoffset: 0; animation: none; }
+      .exploded .later { opacity: 1; animation: none; }
+    }
+
+    .hero-fig figcaption {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--rule-light);
+      font-size: 0.82rem;
+      color: var(--steel);
+    }
+    .parts-list {
+      list-style: none;
+      margin: 0 0 10px;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+    }
+    .parts-list button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      padding: 5px 8px;
+      font-family: var(--text);
+      font-size: 0.83rem;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .parts-list button:hover,
+    .parts-list button.active {
+      background: rgba(196, 43, 34, 0.08);
+      border-color: rgba(196, 43, 34, 0.35);
+    }
+    .part-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--red);
+      color: var(--red-ink);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .part-note {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--steel);
+      min-height: 2.6em;
+      margin: 0;
+    }
+
+    /* Bands */
+    .band { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 1px solid var(--rule); }
+    .band-paper { background: var(--paper); }
+    .band-ink { background: var(--ink); color: var(--paper); border-bottom: none; }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .section-intro {
+      margin: 0;
+      color: var(--steel);
+      font-size: 0.94rem;
+      max-width: 52ch;
+    }
+
+    /* Filter Bar */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--rule);
+      background: var(--white);
+      color: var(--steel);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .filter-btn.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+    .project {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .project:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(14, 27, 42, 0.08);
+      border-color: var(--ink);
+    }
+    .project.flagship {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    }
+    .project.hidden { display: none; }
+
+    /* Photo Placeholder Frame */
+    .shot-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: var(--alu);
+      background-image:
+        linear-gradient(to right, rgba(14, 27, 42, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(14, 27, 42, 0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-bottom: 1px solid var(--rule-light);
+    }
+    .project.flagship .shot-frame {
+      height: 100%;
+      min-height: 300px;
+      aspect-ratio: auto;
+      border-bottom: none;
+      border-right: 1px solid var(--rule-light);
+    }
+    .shot-frame::after {
+      content: attr(data-label);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--steel);
+      text-align: center;
+      padding: 10px 14px;
+      border: 1px dashed var(--rule);
+      background: rgba(246, 247, 248, 0.85);
+      max-width: 82%;
+      border-radius: 3px;
+    }
+    .shot-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+    }
+    .tag-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 4px 9px;
+      border-radius: 2px;
+    }
+    .tag-badge.accent { background: var(--red); color: var(--white); }
+
+    .project-body {
+      padding: 24px 26px 26px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .project-body h3 { margin-bottom: 10px; }
+    .project-body h3 button {
+      all: unset;
+      cursor: pointer;
+    }
+    .project-body h3 button:hover { color: var(--red-ink); }
+    .project-body p {
+      font-size: 0.92rem;
+      color: var(--steel);
+      margin-bottom: 18px;
+    }
+
+    /* Key-value facts */
+    .facts {
+      margin: auto 0 18px;
+      padding: 14px 0;
+      border-top: 1px solid var(--rule-light);
+      border-bottom: 1px solid var(--rule-light);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 16px;
+    }
+    .facts dt {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--steel);
+    }
+    .facts dd {
+      margin: 2px 0 0;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .more-btn {
+      align-self: flex-start;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--red-ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .more-btn:hover { color: var(--ink); }
+    .more-btn::after { content: "→"; transition: transform 0.15s ease; }
+    .more-btn:hover::after { transform: translateX(4px); }
+
+    /* Experience Timeline */
+    .roles {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+    .roles > li {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 12px 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .roles > li:first-child { padding-top: 4px; }
+    .roles > li:last-child { border-bottom: none; padding-bottom: 0; }
+    .when {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--steel);
+      padding-top: 4px;
+    }
+    .role-title {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--red-ink);
+      font-weight: 600;
+      margin: 4px 0 12px;
+    }
+    .roles ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink);
+      font-size: 0.93rem;
+    }
+    .roles ul li { margin-bottom: 6px; }
+    .roles ul li:last-child { margin-bottom: 0; }
+
+    /* Skills, Recognition, Education */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+    .info-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .info-card h3 {
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--red);
+    }
+    .skill-group { margin-bottom: 14px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .stack-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--red-ink);
+      margin-bottom: 6px;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pill {
+      font-size: 0.79rem;
+      background: var(--alu);
+      color: var(--ink);
+      padding: 3px 9px;
+      border-radius: 3px;
+      border: 1px solid var(--rule-light);
+    }
+    .plain-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.89rem;
+      display: grid;
+      gap: 9px;
+    }
+    .edu-block { margin-bottom: 18px; font-size: 0.9rem; }
+    .edu-block:last-child { margin-bottom: 0; }
+    .edu-meta {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--steel);
+      margin: 3px 0 8px;
+    }
+
+    /* Contact Band */
+    .contact h2 { color: var(--white); margin-bottom: 12px; }
+    .contact .section-intro { color: #b8c4d0; margin-bottom: 24px; }
+    .mail-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .mail {
+      font-family: var(--display);
+      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+      font-weight: 800;
+      color: var(--white);
+      text-decoration-color: var(--red-light);
+      letter-spacing: 0.01em;
+    }
+    .mail:hover { color: var(--red-light); }
+    .copy-btn {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--paper);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .copy-btn:hover { background: var(--red); border-color: var(--red); }
+
+    .contact-links {
+      list-style: none;
+      margin: 0;
+      padding: 20px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+    }
+    .contact-links a {
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      text-decoration-color: var(--red-light);
+    }
+    .contact-links a:hover { color: var(--red-light); }
+
+    /* Footer */
+    .footer {
+      background: #09121d;
+      color: #8f9ead;
+      font-size: 0.8rem;
+      padding: 22px 0;
+    }
+    .footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 20px;
+    }
+    .footer p { margin: 0; }
+    .footer a { color: #cbd5e1; text-decoration-color: var(--red-light); }
+
+    /* Case Study Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(14, 27, 42, 0.76);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 3vw, 28px);
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      background: var(--paper);
+      color: var(--ink);
+      width: 100%;
+      max-width: 860px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--rule);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+    .modal-top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .modal-kicker {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red-light);
+    }
+    .modal-close {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .modal-close:hover { background: var(--red); border-color: var(--red); }
+
+    .modal-body { padding: clamp(22px, 4vw, 36px); }
+    .modal-body h2 { margin-bottom: 10px; }
+    .modal-lede { font-size: 1.05rem; color: var(--steel); margin-bottom: 20px; }
+    .modal-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px 18px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      padding: 16px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+    }
+    .modal-facts dt {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: var(--steel);
+    }
+    .modal-facts dd { margin: 2px 0 0; font-size: 0.86rem; font-weight: 700; }
+    .modal-section { margin-bottom: 22px; }
+    .modal-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .modal-section ul { margin: 8px 0 0; padding-left: 20px; }
+    .modal-section li { margin-bottom: 6px; font-size: 0.93rem; }
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .modal-gallery figure { margin: 0; }
+    .modal-gallery figcaption {
+      font-size: 0.78rem;
+      color: var(--steel);
+      margin-top: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px) {
+      .hero-grid,
+      .project.flagship,
+      .grid-3 { grid-template-columns: 1fr; }
+      .project.flagship .shot-frame {
+        border-right: none;
+        border-bottom: 1px solid var(--rule-light);
+        min-height: 240px;
       }
     }
-  </script>
-  <style>
-    .blueprint-grid {
-      background-image:
-        linear-gradient(to right, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
-      background-size: 36px 36px;
-    }
-    .modal-backdrop {
-      background: rgba(2, 6, 23, 0.82);
-      backdrop-filter: blur(6px);
+    @media (max-width: 720px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .roles > li { grid-template-columns: 1fr; gap: 4px; }
+      .nav .wrap { padding-top: 10px; padding-bottom: 10px; }
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200">
+<body>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Navigation -->
-  <header class="fixed top-0 inset-x-0 z-40 bg-slate-950/85 backdrop-blur-md border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#top" class="flex items-center gap-2.5 group">
-        <span class="w-8 h-8 rounded-lg bg-sky-500/15 border border-sky-400/30 flex items-center justify-center font-mono text-sm font-semibold text-sky-400 group-hover:bg-sky-500 group-hover:text-slate-950 transition">FG</span>
-        <span class="font-semibold tracking-tight text-slate-100">Felicia Guo</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
-        <a href="#projects" class="hover:text-sky-400 transition">Projects</a>
-        <a href="#experience" class="hover:text-sky-400 transition">Experience</a>
-        <a href="#skills" class="hover:text-sky-400 transition">Skills</a>
-        <a href="#awards" class="hover:text-sky-400 transition">Awards</a>
-        <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500 text-slate-950 font-semibold hover:bg-sky-400 transition">Contact</a>
-      </nav>
-      <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg border border-slate-800 text-slate-300 hover:text-white" aria-label="Toggle Menu">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="wrap">
+      <a class="brand" href="#top">Felicia Guo</a>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="nav-cta" href="assets/Felicia_Guo_Resume.pdf" target="_blank" rel="noopener">Résumé PDF</a></li>
+      </ul>
     </div>
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3 text-sm">
-      <a href="#projects" class="block text-slate-300 hover:text-sky-400">Projects</a>
-      <a href="#experience" class="block text-slate-300 hover:text-sky-400">Experience</a>
-      <a href="#skills" class="block text-slate-300 hover:text-sky-400">Skills</a>
-      <a href="#awards" class="block text-slate-300 hover:text-sky-400">Awards</a>
-      <a href="#contact" class="block text-sky-400 font-semibold">Contact</a>
-    </div>
-  </header>
+  </nav>
 
-  <!-- Hero Section -->
-  <section id="top" class="relative pt-32 pb-20 md:pt-40 md:pb-28 blueprint-grid border-b border-slate-800/80 overflow-hidden">
-    <div class="absolute -top-24 right-0 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="max-w-6xl mx-auto px-6 relative">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono mb-6">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Targeting Summer 2027 Engineering Internships • US Citizen
-      </div>
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white max-w-4xl leading-tight">
-        Designing rugged <span class="bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">robotics, aerospace, and autonomous hardware</span> from CAD to field deployment.
-      </h1>
-      <p class="mt-6 text-lg text-slate-300 max-w-2xl leading-relaxed">
-        I'm <strong class="text-white">Felicia Guo</strong>, a B.S. Mechanical Engineering &amp; Robotics Minor student at <strong class="text-white">Carnegie Mellon University</strong> (Class of 2030). I build lunar rovers, autonomous wildfire-suppression drones, ISS microgravity experiments, and ruggedized sensor systems.
-      </p>
-
-      <div class="mt-8 flex flex-wrap gap-4">
-        <a href="#projects" class="px-6 py-3 rounded-lg bg-sky-500 text-slate-950 font-semibold hover:bg-sky-400 transition shadow-lg shadow-sky-500/20">
-          Explore Projects
-        </a>
-        <!-- Place FeliciaGuo_Resume.pdf in /assets/ to activate this button -->
-        <a href="./assets/FeliciaGuo_Resume.pdf" target="_blank" class="px-6 py-3 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 font-semibold hover:border-sky-400 hover:text-sky-300 transition">
-          Download Resume (PDF)
-        </a>
-        <a href="https://linkedin.com/in/feliciarguo" target="_blank" class="px-6 py-3 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 font-semibold hover:border-sky-400 hover:text-sky-300 transition">
-          LinkedIn ↗
-        </a>
-      </div>
-
-      <!-- Key Metrics Strip -->
-      <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-2xl font-bold text-white font-mono">Top 5 / 350</div>
-          <div class="text-xs text-slate-400 mt-1">XPRIZE Wildfire Global Finalist</div>
+  <main id="main">
+    <!-- ===================================================== HERO -->
+    <header class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="dot" aria-hidden="true"></span>
+            Carnegie Mellon University &middot; B.S. Mechanical Engineering &middot; Robotics Minor
+          </div>
+          <h1>Felicia Guo</h1>
+          <p class="lede">Mechanical engineering student who designs, fabricates, and tests drones, planetary rovers, underwater telemetry hardware, and spaceflight payloads.</p>
+          <div class="seeking">Targeting Summer 2027 Mechanical / Robotics Engineering Internships</div>
+          <div class="actions">
+            <a class="btn" href="#projects">Explore Projects</a>
+            <a class="btn btn-line" href="assets/Felicia_Guo_Resume.pdf" target="_blank" rel="noopener">Download Résumé (PDF)</a>
+          </div>
+          <ul class="proof">
+            <li><strong>XPRIZE Wildfire Finalist:</strong> Top 5 of 350 teams worldwide &amp; the only high school team in the finals.</li>
+            <li><strong>2 Experiments Launched to the ISS:</strong> Automated, resin-printed microlabs flown in 2024 and 2025.</li>
+            <li><strong>23 VEX Robotics Awards:</strong> 3rd Place in World Championship Robot Skills &amp; 6&times; Tournament Champion.</li>
+          </ul>
         </div>
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-2xl font-bold text-white font-mono">2 Launches</div>
-          <div class="text-xs text-slate-400 mt-1">ISS Microgravity Microlabs</div>
-        </div>
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-2xl font-bold text-white font-mono">3rd in World</div>
-          <div class="text-xs text-slate-400 mt-1">VEX VRC Robot Skills (23 Awards)</div>
-        </div>
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-2xl font-bold text-white font-mono">1 of 8</div>
-          <div class="text-xs text-slate-400 mt-1">2026 PTDA National Scholar</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-20 max-w-6xl mx-auto px-6">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-      <div>
-        <span class="font-mono text-xs uppercase tracking-widest text-sky-400">Engineering Portfolio</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Featured Projects</h2>
-        <p class="text-slate-400 mt-2 text-sm">Click any project card for full technical specs, mechanical details, and testing outcomes.</p>
-      </div>
-      <!-- Filter Buttons -->
-      <div class="flex flex-wrap gap-2" id="filterButtons">
-        <button data-filter="all" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-mono bg-sky-500 text-slate-950 font-semibold transition">All</button>
-        <button data-filter="drones" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono bg-slate-900 border border-slate-700 text-slate-300 hover:border-sky-400 transition">Drones &amp; Field</button>
-        <button data-filter="space" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono bg-slate-900 border border-slate-700 text-slate-300 hover:border-sky-400 transition">Space &amp; Lunar</button>
-        <button data-filter="robotics" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono bg-slate-900 border border-slate-700 text-slate-300 hover:border-sky-400 transition">Robotics &amp; AUV</button>
-      </div>
-    </div>
+        <figure class="hero-fig">
+          <div class="fig-header">
+            <span>FIG 01 // XPRIZE WATER PAYLOAD</span>
+            <span>EXPLODED VIEW</span>
+          </div>
+          <svg class="exploded" id="explodedSvg" viewBox="-103.5 -381.5 277 441.9" role="img" aria-labelledby="exploded-title exploded-desc" xmlns="http://www.w3.org/2000/svg">
+            <title id="exploded-title">Exploded view of a water payload</title>
+            <desc id="exploded-desc">Interactive exploded view of three parts stacked on a centerline: a foam proportioner, a hexagonal-prism water tank, and a magnetic tubing coupling.</desc>
 
-    <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Cards injected via JS for clean modal integration -->
-    </div>
-  </section>
+            <g class="part" data-part="coupling" tabindex="0" aria-label="Part 3: Magnetic tubing coupling">
+              <path class="solid" pathLength="1" d="M-31.8 -24 A31.8 18.4 0 1 0 31.8 -24 A31.8 18.4 0 1 0 -31.8 -24 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-31.8 -24 L-31.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M31.8 -24 L31.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-31.8 0 A31.8 18.4 0 0 0 31.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-17.1 -24 A17.1 9.9 0 1 0 17.1 -24 A17.1 9.9 0 1 0 -17.1 -24 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <g class="later">
+                <path d="M-31.8 0 A31.8 18.4 0 0 1 31.8 0" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+              </g>
+            </g>
 
-  <!-- Experience & Education Section -->
-  <section id="experience" class="py-20 bg-slate-900/40 border-y border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-6">
-      <span class="font-mono text-xs uppercase tracking-widest text-sky-400">Background</span>
-      <h2 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-12">Experience &amp; Education</h2>
+            <g class="part" data-part="tank" tabindex="0" aria-label="Part 2: Hexagonal-prism water tank">
+              <path class="solid" pathLength="1" d="M36.7 -152.4 L-36.7 -152.4 L-73.5 -189.1 L-36.7 -225.9 L36.7 -225.9 L73.5 -189.1 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M36.7 -152.4 L36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M36.7 -72.4 L-36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-36.7 -152.4 L-36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-36.7 -72.4 L-73.5 -109.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-73.5 -189.1 L-73.5 -109.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M73.5 -189.1 L73.5 -109.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M73.5 -109.1 L36.7 -72.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <g class="later">
+                <path d="M-73.5 -109.1 L-36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+                <path d="M-36.7 -225.9 L-36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+                <path d="M-36.7 -145.9 L36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+                <path d="M36.7 -225.9 L36.7 -145.9" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+                <path d="M36.7 -145.9 L73.5 -109.1" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+              </g>
+            </g>
 
-      <div class="grid lg:grid-cols-3 gap-10">
-        <!-- Experience Column -->
-        <div class="lg:col-span-2 space-y-6">
-          <h3 class="font-mono text-sm uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-2">Engineering Experience</h3>
+            <g class="part" data-part="prop" tabindex="0" aria-label="Part 1: Foam proportioner">
+              <path class="solid" pathLength="1" d="M-34.3 -319.7 A34.3 19.8 0 1 0 34.3 -319.7 A34.3 19.8 0 1 0 -34.3 -319.7 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-34.3 -319.7 L-34.3 -275.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M34.3 -319.7 L34.3 -275.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path class="solid" pathLength="1" d="M-34.3 -275.7 A34.3 19.8 0 0 0 34.3 -275.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+              <g class="later">
+                <path d="M-34.3 -275.7 A34.3 19.8 0 0 1 34.3 -275.7" fill="none" stroke="#4A5866" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+              </g>
+            </g>
 
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition">
-            <div class="flex flex-wrap justify-between gap-2">
-              <h4 class="text-lg font-bold text-white">Airlab</h4>
-              <span class="font-mono text-xs text-sky-400">2026 – Present</span>
+            <g class="later">
+              <path d="M0 -353.5 L0 32.4" stroke="#4A5866" stroke-width="1.1" stroke-dasharray="14 3 2 3" fill="none"/>
+            </g>
+
+            <g class="later">
+              <g class="callout-group" data-part="prop">
+                <path d="M34.3 -297.7 L112.5 -297.7" stroke="#C42B22" stroke-width="1.2" fill="none"/>
+                <circle cx="34.3" cy="-297.7" r="2.2" fill="#C42B22"/>
+                <circle cx="125.5" cy="-297.7" r="12.5" fill="#F6F7F8" stroke="#C42B22" stroke-width="1.4"/>
+                <text x="125.5" y="-293.1" text-anchor="middle" font-size="13" font-weight="700" fill="#C42B22" font-family="Arial, sans-serif">1</text>
+              </g>
+              <g class="callout-group" data-part="tank">
+                <path d="M73.5 -149.1 L112.5 -149.1" stroke="#C42B22" stroke-width="1.2" fill="none"/>
+                <circle cx="73.5" cy="-149.1" r="2.2" fill="#C42B22"/>
+                <circle cx="125.5" cy="-149.1" r="12.5" fill="#F6F7F8" stroke="#C42B22" stroke-width="1.4"/>
+                <text x="125.5" y="-144.5" text-anchor="middle" font-size="13" font-weight="700" fill="#C42B22" font-family="Arial, sans-serif">2</text>
+              </g>
+              <g class="callout-group" data-part="coupling">
+                <path d="M31.8 -12 L112.5 -12" stroke="#C42B22" stroke-width="1.2" fill="none"/>
+                <circle cx="31.8" cy="-12" r="2.2" fill="#C42B22"/>
+                <circle cx="125.5" cy="-12" r="12.5" fill="#F6F7F8" stroke="#C42B22" stroke-width="1.4"/>
+                <text x="125.5" y="-7.4" text-anchor="middle" font-size="13" font-weight="700" fill="#C42B22" font-family="Arial, sans-serif">3</text>
+              </g>
+            </g>
+          </svg>
+
+          <figcaption>
+            <div class="parts-list" id="partControls">
+              <button type="button" data-part="prop"><span class="part-num">1</span> Foam proportioner</button>
+              <button type="button" data-part="tank"><span class="part-num">2</span> Hexagonal-prism water tank</button>
+              <button type="button" data-part="coupling"><span class="part-num">3</span> Magnetic tubing coupling</button>
             </div>
-            <p class="text-sm text-slate-400 font-medium">Mechanical Engineer, Drone Pilot</p>
-            <ul class="mt-3 space-y-1.5 text-sm text-slate-300 list-disc list-inside">
-              <li>Designed and fabricated modular sensor payloads for Rubicon Robotics ATVs built to withstand rugged off-road field testing.</li>
+            <p class="part-note" id="partNote">Hover or select a component to inspect the Tarot X6 water payload assembly.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <!-- ===================================================== PROJECTS -->
+    <section class="band band-paper" id="projects" aria-labelledby="projects-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="projects-h">Hardware Projects</h2>
+          <p class="section-intro">Systems I designed, machined, 3D printed, and field-tested. Select any project to read the full engineering case study.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter projects by category">
+          <button type="button" class="filter-btn active" data-filter="all">All (6)</button>
+          <button type="button" class="filter-btn" data-filter="aerospace">Drones &amp; Space</button>
+          <button type="button" class="filter-btn" data-filter="robotics">Rovers &amp; Robotics</button>
+          <button type="button" class="filter-btn" data-filter="electrical">Electrical &amp; Payloads</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Flagship Project 1 -->
+          <article class="project flagship" data-category="aerospace robotics">
+            <div class="shot-frame" data-open="xprize" data-label="Add photo: assets/img/xprize-hero.jpg">
+              <span class="tag-badge accent">XPRIZE Finalist &middot; Top 5 / 350</span>
+              <img src="assets/img/xprize-hero.jpg" alt="Tarot X6 drone carrying the hexagonal water tank payload" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-body">
+              <h3><button type="button" data-open="xprize">Drone-Based Wildfire Suppression System</button></h3>
+              <p>In-house water-and-foam Tarot X6 payload, automated stepper-motor refill gantry base station, and a patent-pending 3D-printed fire-suppressing capsule built for the XPRIZE Wildfire finals.</p>
+              <dl class="facts">
+                <div><dt>Role</dt><dd>Mechanical Team Lead &amp; Drone Pilot</dd></div>
+                <div><dt>Timeline</dt><dd>2024 – 2026</dd></div>
+                <div><dt>Partners</dt><dd>Kaizen Aerospace, PowerUS, SensoRy AI</dd></div>
+                <div><dt>Hardware</dt><dd>Tarot X6, 3D Printing, Machining, Steppers</dd></div>
+              </dl>
+              <button type="button" class="more-btn" data-open="xprize">Read Case Study</button>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project" data-category="aerospace">
+            <div class="shot-frame" data-open="iss" data-label="Add photo: assets/img/iss-hero.jpg">
+              <span class="tag-badge">Flown to ISS (2024 &amp; 2025)</span>
+              <img src="assets/img/iss-hero.jpg" alt="Automated resin-printed microlab for the International Space Station" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-body">
+              <h3><button type="button" data-open="iss">ISS Microgravity Experiments</button></h3>
+              <p>Two automated, resin-printed, waterproofed microlabs launched to the International Space Station to study galvanic/electrolytic cells and conductive foam development in microgravity.</p>
+              <dl class="facts">
+                <div><dt>Role</dt><dd>Program Manager &amp; Honors Fellow</dd></div>
+                <div><dt>Timeline</dt><dd>2023 – 2025</dd></div>
+                <div><dt>Recognition</dt><dd>2025 Innovator of the Year, ASGSR 2nd</dd></div>
+                <div><dt>Hardware</dt><dd>CAD, Resin 3D Printing, Automation</dd></div>
+              </dl>
+              <button type="button" class="more-btn" data-open="iss">Read Case Study</button>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project" data-category="robotics">
+            <div class="shot-frame" data-open="tacobell" data-label="Add photo: assets/img/lunabotics-hero.jpg">
+              <span class="tag-badge">CMU Moon Miners</span>
+              <img src="assets/img/lunabotics-hero.jpg" alt="Tacobell two-thirds scale Lunabotics prototype rover" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-body">
+              <h3><button type="button" data-open="tacobell">Lunabotics Prototype Rover (“Tacobell”)</button></h3>
+              <p>Two-thirds-scale lunar rover testbed built to measure drawbar pull under varying loads and evaluate slippage across a 3D-printed tracked drivetrain and gear/support wheel system.</p>
+              <dl class="facts">
+                <div><dt>Role</dt><dd>Mechanical Subteam Member</dd></div>
+                <div><dt>Timeline</dt><dd>2026</dd></div>
+                <div><dt>Focus</dt><dd>Drawbar Pull, Slippage, Mass Budget</dd></div>
+                <div><dt>Hardware</dt><dd>CAD, 3D-Printed Tracks, Drivetrain</dd></div>
+              </dl>
+              <button type="button" class="more-btn" data-open="tacobell">Read Case Study</button>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project" data-category="robotics electrical">
+            <div class="shot-frame" data-open="airlab" data-label="Add photo: assets/img/airlab-atv.jpg">
+              <span class="tag-badge">CMU Airlab</span>
+              <img src="assets/img/airlab-atv.jpg" alt="Modular sensor payload mounted to Rubicon Robotics ATV" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-body">
+              <h3><button type="button" data-open="airlab">Rubicon ATV Modular Sensor Payloads</button></h3>
+              <p>Designed and fabricated ruggedized, modular sensor mounting payloads for Rubicon Robotics ATVs engineered to survive high-vibration off-road autonomy testing.</p>
+              <dl class="facts">
+                <div><dt>Role</dt><dd>Mechanical Engineer &amp; Drone Pilot</dd></div>
+                <div><dt>Timeline</dt><dd>2026 – Present</dd></div>
+                <div><dt>Lab</dt><dd>Carnegie Mellon Airlab</dd></div>
+                <div><dt>Focus</dt><dd>Rugged Mechanical Packaging</dd></div>
+              </dl>
+              <button type="button" class="more-btn" data-open="airlab">Read Case Study</button>
+            </div>
+          </article>
+
+          <!-- Project 5 -->
+          <article class="project" data-category="electrical robotics">
+            <div class="shot-frame" data-open="auv" data-label="Add photo: assets/img/tartanauv.jpg">
+              <span class="tag-badge">TartanAUV</span>
+              <img src="assets/img/tartanauv.jpg" alt="TartanAUV redesigned tether spool and waterproofed cabling" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-body">
+              <h3><button type="button" data-open="auv">Underwater Tether Spool &amp; Sensor Circuits</button></h3>
+              <p>Redesigned a custom tether spool with waterproofed soldered cabling for reliable underwater telemetry deployment, alongside custom perfboard circuits to validate sensors prior to PCB layout.</p>
+              <dl class="facts">
+                <div><dt>Role</dt><dd>Electrical Subteam Member</dd></div>
+                <div><dt>Timeline</dt><dd>2026 – Present</dd></div>
+                <div><dt>Team</dt><dd>TartanAUV (CMU)</dd></div>
+                <div><dt>Tools</dt><dd>Altium, KiCad, Soldering, Perfboard</dd></div>
+              </dl>
+              <button type="button" class="more-btn" data-open="auv">Read Case Study</button>
+            </div>
+          </article>
+
+          <!-- Project 6 -->
+          <article class="project" data-category="robotics">
+            <div class="shot-frame" data-open="vex" data-label="Add photo: assets/img/vex-robot.jpg">
+              <span class="tag-badge">3rd at Worlds &middot; 23 Awards</span>
+              <img src="assets/img/vex-robot.jpg" alt="VEX V5 competition robot built by Felicia Guo" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-body">
+              <h3><button type="button" data-open="vex">VEX V5 Competition Robotics</button></h3>
+              <p>Directed the mechanical design, fabrication, and autonomous optimization of 5+ competition robots over five seasons, earning 3rd Place in World Championship Robot Skills and 6&times; Tournament Champion.</p>
+              <dl class="facts">
+                <div><dt>Role</dt><dd>Designer, Builder, Commander</dd></div>
+                <div><dt>Timeline</dt><dd>2021 – 2026</dd></div>
+                <div><dt>Honors</dt><dd>23 Awards incl. Excellence &amp; Design</dd></div>
+                <div><dt>Stack</dt><dd>C++, CAD, Autonomous Control</dd></div>
+              </dl>
+              <button type="button" class="more-btn" data-open="vex">Read Case Study</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== EXPERIENCE -->
+    <section class="band" id="experience" aria-labelledby="experience-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="experience-h">Experience</h2>
+          <p class="section-intro">Research labs, robotics teams, and engineering leadership.</p>
+        </div>
+        <ul class="roles">
+          <li>
+            <div class="when">2026 – Present</div>
+            <div>
+              <h3>Airlab (Carnegie Mellon University)</h3>
+              <p class="role-title">Mechanical Engineer, Drone Pilot</p>
+              <ul>
+                <li>Designed and fabricated modular sensor payloads for Rubicon Robotics ATVs to withstand rugged off-road testing.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="when">2026 – Present</div>
+            <div>
+              <h3>Carnegie Mellon Moon Miners</h3>
+              <p class="role-title">Mechanical Subteam Member</p>
+              <ul>
+                <li>Modeled drivetrain and chassis CAD assemblies for prototype and competition lunar rovers under strict weight limits.</li>
+                <li>Presented mechanical architecture, trade studies, and manufacturing plans at Preliminary Design Review.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="when">2026 – Present</div>
+            <div>
+              <h3>TartanAUV</h3>
+              <p class="role-title">Electrical Subteam Member</p>
+              <ul>
+                <li>Redesigned custom tether spool and soldered waterproofed cabling to improve underwater telemetry and deployment.</li>
+                <li>Prototyped and soldered custom perfboard circuits to validate sensor hardware before PCB layout.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="when">2024 – 2026</div>
+            <div>
+              <h3>XPRIZE Wildfire Competition (Team Wildfire Quest)</h3>
+              <p class="role-title">Finalist, Mechanical Team Lead, Remote Drone Pilot</p>
+              <ul>
+                <li>Spearheaded the mechanical design and fabrication of drone-based wildfire suppression hardware.</li>
+                <li>Partnered with Kaizen Aerospace and PowerUS on Dragon and xFold drones, and with SensoRy AI on wildfire detection.</li>
+                <li>Only high school team to qualify for the finals, ranking top 5 of 350 teams worldwide; covered by 8+ news outlets including NBC, CBS, GMA, Yahoo, and AccuWeather.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="when">2023 – 2026</div>
+            <div>
+              <h3>Quest for Space ISS Research Lab</h3>
+              <p class="role-title">Program Manager, Mechanical Honors Fellow, Researcher</p>
+              <ul>
+                <li>Designed, engineered, and deployed two microgravity experiments to the International Space Station.</li>
+                <li>Led 4 workshops training 60 peers in experimental design and fabrication; named 2025 Innovator of the Year.</li>
+                <li>Presented microgravity research on galvanic/electrolytic cells and conductive foam at two ASGSR national conferences (200+ participants).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="when">2021 – 2026</div>
+            <div>
+              <h3>VEX VRC / V5 Robotics Competition</h3>
+              <p class="role-title">Designer, Builder, Commander</p>
+              <ul>
+                <li>Directed design and construction of 5+ competition robots; collaborated on gameplay strategy and optimized autonomous code.</li>
+                <li>Earned 23 awards including 3rd Place in World Championship Robot Skills, State Championship Robot Skills Champion, and 6&times; Tournament Champion.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="when">Summer 2022</div>
+            <div>
+              <h3>Magikid Robotics Lab</h3>
+              <p class="role-title">Coaching Intern</p>
+              <ul>
+                <li>Coached the Girl Powered Team to a championship victory at the Google Girl Powered VEX IQ Competition.</li>
+                <li>Taught foundational robotics concepts and mentored elementary students in building small robots.</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================================================== SKILLS & EDUCATION -->
+    <section class="band band-paper" id="skills" aria-labelledby="skills-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="skills-h">Skills, Honors &amp; Education</h2>
+        </div>
+        <div class="grid-3">
+          <div class="info-card">
+            <h3>Technical Toolkit</h3>
+            <div class="skill-group">
+              <span class="stack-label">Mechanical &amp; CAD</span>
+              <div class="pills">
+                <span class="pill">SolidWorks</span>
+                <span class="pill">Fusion 360</span>
+                <span class="pill">Onshape</span>
+                <span class="pill">Inventor</span>
+                <span class="pill">AutoCAD</span>
+                <span class="pill">Drone Dev</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <span class="stack-label">Fabrication</span>
+              <div class="pills">
+                <span class="pill">FDM &amp; Resin 3D Printing</span>
+                <span class="pill">Machining</span>
+                <span class="pill">Waterproofing</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <span class="stack-label">Electrical</span>
+              <div class="pills">
+                <span class="pill">Altium</span>
+                <span class="pill">KiCad</span>
+                <span class="pill">EasyEDA</span>
+                <span class="pill">Soldering</span>
+                <span class="pill">Perfboard</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <span class="stack-label">Programming</span>
+              <div class="pills">
+                <span class="pill">Python</span>
+                <span class="pill">C++</span>
+                <span class="pill">C</span>
+                <span class="pill">Java</span>
+                <span class="pill">MATLAB</span>
+                <span class="pill">JavaScript</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Honors &amp; Awards</h3>
+            <ul class="plain-list">
+              <li><strong>2026 PTDA Scholarship Winner</strong> — 1 of 8 recipients nationwide.</li>
+              <li><strong>Quest for Space ISS Lab</strong> — 2025 Innovator of the Year &amp; Honors Fellow.</li>
+              <li><strong>XPRIZE Wildfire Finalist</strong> — Top 5 of 350 teams globally.</li>
+              <li><strong>VEX Worlds 2024</strong> — 3rd Place Robot Skills; 2024 &amp; 2025 Worlds Qualifier.</li>
+              <li><strong>VEX Robotics</strong> — State Robot Skills Champion, 2026 Regional Excellence Award, 6&times; Tournament Champion, 2&times; Design Award, 3&times; Innovate Award.</li>
+              <li><strong>AWS DeepRacer (2023)</strong> — 2nd Place Division B, CIE Youth STEM Convention.</li>
             </ul>
           </div>
 
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition">
-            <div class="flex flex-wrap justify-between gap-2">
-              <h4 class="text-lg font-bold text-white">Carnegie Mellon Moon Miners (Lunabotics)</h4>
-              <span class="font-mono text-xs text-sky-400">2026 – Present</span>
+          <div class="info-card">
+            <h3>Education</h3>
+            <div class="edu-block">
+              <strong>Carnegie Mellon University</strong>
+              <div class="edu-meta">Pittsburgh, PA &middot; Aug 2026 – May 2030</div>
+              <p>B.S. in Mechanical Engineering, Minor in Robotics.</p>
+              <p><strong>Coursework:</strong> Fundamentals of Mechanical Engineering, Physics I for Engineers, Linear Algebra &amp; Vector Calculus for Engineers.</p>
             </div>
-            <p class="text-sm text-slate-400 font-medium">Mechanical Subteam Member</p>
-            <ul class="mt-3 space-y-1.5 text-sm text-slate-300 list-disc list-inside">
-              <li>Modeled drivetrain and chassis CAD assemblies for prototype and competition lunar rovers under strict weight limits.</li>
-              <li>Presented mechanical architecture, trade studies, and manufacturing plans at Preliminary Design Review (PDR).</li>
-            </ul>
-          </div>
-
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition">
-            <div class="flex flex-wrap justify-between gap-2">
-              <h4 class="text-lg font-bold text-white">TartanAUV</h4>
-              <span class="font-mono text-xs text-sky-400">2026 – Present</span>
-            </div>
-            <p class="text-sm text-slate-400 font-medium">Electrical Subteam Member</p>
-            <ul class="mt-3 space-y-1.5 text-sm text-slate-300 list-disc list-inside">
-              <li>Redesigned custom tether spool and soldered waterproofed cabling to improve underwater telemetry and deployment.</li>
-              <li>Prototyped custom perfboard circuits to validate sensor hardware prior to PCB layout.</li>
-            </ul>
-          </div>
-
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition">
-            <div class="flex flex-wrap justify-between gap-2">
-              <h4 class="text-lg font-bold text-white">XPRIZE Wildfire Competition (Team Wildfire Quest)</h4>
-              <span class="font-mono text-xs text-sky-400">2024 – 2026</span>
-            </div>
-            <p class="text-sm text-slate-400 font-medium">Finalist, Mechanical Team Lead, Remote Drone Pilot</p>
-            <ul class="mt-3 space-y-1.5 text-sm text-slate-300 list-disc list-inside">
-              <li>Led mechanical design of drone-based wildfire suppression hardware; only high school finalist, ranking Top 5 of 350 teams worldwide.</li>
-              <li>Partnered with Kaizen Aerospace, PowerUS (Dragon &amp; xFold drones), and SensoRy AI; covered by 8+ outlets including NBC, CBS, GMA, Yahoo, and AccuWeather.</li>
-            </ul>
-          </div>
-
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition">
-            <div class="flex flex-wrap justify-between gap-2">
-              <h4 class="text-lg font-bold text-white">Quest for Space — ISS Research Lab</h4>
-              <span class="font-mono text-xs text-sky-400">2023 – 2026</span>
-            </div>
-            <p class="text-sm text-slate-400 font-medium">Program Manager, Mechanical Honors Fellow, Researcher</p>
-            <ul class="mt-3 space-y-1.5 text-sm text-slate-300 list-disc list-inside">
-              <li>Led 4 workshops training 60 peers in experimental design and fabrication; named 2025 Innovator of the Year.</li>
-              <li>Deployed two automated microgravity experiments to the ISS and presented at two ASGSR national conferences (200+ participants; 2nd place).</li>
-            </ul>
-          </div>
-
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition">
-            <div class="flex flex-wrap justify-between gap-2">
-              <h4 class="text-lg font-bold text-white">VEX VRC Robotics &amp; Magikid Robotics Lab</h4>
-              <span class="font-mono text-xs text-sky-400">2021 – 2026</span>
-            </div>
-            <p class="text-sm text-slate-400 font-medium">Designer, Builder, Commander • Coaching Intern (Summer 2022)</p>
-            <ul class="mt-3 space-y-1.5 text-sm text-slate-300 list-disc list-inside">
-              <li>Directed design and build of 5+ competition robots, earning 23 awards including 3rd Place in World Championship Robot Skills and 6x Tournament Champion.</li>
-              <li>Coached the Girl Powered Team to a championship victory at the Google Girl Powered VEX IQ Competition.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Education Column -->
-        <div class="space-y-6">
-          <h3 class="font-mono text-sm uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-2">Education</h3>
-
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800">
-            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-mono bg-red-500/15 text-red-300 border border-red-500/30 mb-3">Carnegie Mellon University</span>
-            <h4 class="text-lg font-bold text-white">B.S. Mechanical Engineering</h4>
-            <p class="text-sm text-sky-400 font-medium">Minor in Robotics</p>
-            <p class="text-xs font-mono text-slate-400 mt-1">Pittsburgh, PA • Aug 2026 – May 2030</p>
-            <div class="mt-4 pt-4 border-t border-slate-800 text-xs text-slate-300 space-y-2">
-              <p><strong class="text-white">Coursework:</strong> Fundamentals of Mechanical Engineering, Physics I for Engineers, Linear Algebra &amp; Vector Calculus for Engineers</p>
-              <p><strong class="text-white">Honors:</strong> 2026 PTDA Scholarship Winner (1 of 8 nationwide)</p>
-            </div>
-          </div>
-
-          <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800">
-            <h4 class="text-lg font-bold text-white">Valley Christian High School</h4>
-            <p class="text-sm text-slate-400">High School Diploma</p>
-            <p class="text-xs font-mono text-slate-400 mt-1">San Jose, CA • Aug 2022 – May 2026</p>
-            <div class="mt-4 pt-4 border-t border-slate-800 text-xs text-slate-300">
-              <strong class="text-white">Selected Coursework:</strong> Multivariable Calculus &amp; Linear Algebra (Dual Enrollment), AP Physics C (Mechanics &amp; E&amp;M), AP Calculus BC, AP CSA, PLTW Principles of Engineering
+            <div class="edu-block">
+              <strong>Valley Christian High School</strong>
+              <div class="edu-meta">San Jose, CA &middot; Class of 2026</div>
+              <p><strong>Coursework:</strong> AP Physics C (Mech &amp; E&amp;M), AP Calculus BC, Multivariable Calculus &amp; Linear Algebra (Dual Enrollment), AP CSA, PLTW Principles of Engineering.</p>
             </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- ===================================================== CONTACT -->
+    <section class="band band-ink contact" id="contact" aria-labelledby="contact-h">
+      <div class="wrap">
+        <h2 id="contact-h">Let’s build something together.</h2>
+        <p class="section-intro">Seeking a Summer 2027 engineering internship in mechanical design, robotics, drones, or aerospace hardware. Email is the fastest way to reach me.</p>
+        <div class="mail-row">
+          <a class="mail" href="mailto:feliciaguo@cmu.edu">feliciaguo@cmu.edu</a>
+          <button type="button" class="copy-btn" id="copyEmailBtn">Copy Email</button>
+        </div>
+        <ul class="contact-links">
+          <li><a href="https://linkedin.com/in/feliciarguo" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="assets/Felicia_Guo_Resume.pdf" target="_blank" rel="noopener">Download Résumé (PDF)</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>&copy; 2026 Felicia Guo &middot; Mechanical Engineering &amp; Robotics Portfolio</p>
+      <p>Hosted on GitHub Pages &middot; <a href="https://github.com/YOUR-USERNAME/YOUR-USERNAME.github.io" target="_blank" rel="noopener">View Repository</a></p>
     </div>
-  </section>
+  </footer>
 
-  <!-- Technical Skills Section -->
-  <section id="skills" class="py-20 max-w-6xl mx-auto px-6">
-    <span class="font-mono text-xs uppercase tracking-widest text-sky-400">Capabilities</span>
-    <h2 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-10">Technical Skills</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800">
-        <div class="w-10 h-10 rounded-lg bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 mb-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-3">Mechanical &amp; Fabrication</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">SolidWorks</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Fusion 360</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Autodesk Inventor</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">AutoCAD</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">OnShape</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">FDM &amp; Resin 3D Printing</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Machining</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Drone Development</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Robotics</span>
-        </div>
+  <!-- ===================================================== CASE STUDY MODAL -->
+  <div class="modal-backdrop" id="caseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-top">
+        <span class="modal-kicker" id="modalKicker">Engineering Case Study</span>
+        <button type="button" class="modal-close" id="modalCloseBtn">Close [ESC]</button>
       </div>
-
-      <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800">
-        <div class="w-10 h-10 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-3">Electrical &amp; Hardware</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Altium Designer</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">KiCad</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">EasyEDA</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Soldering</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Waterproof Cabling</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Perfboard Prototyping</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Stepper Motors</span>
-        </div>
-      </div>
-
-      <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800">
-        <div class="w-10 h-10 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-3">Software &amp; Analysis</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Python</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">C++</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">C</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">Java</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">JavaScript</span>
-          <span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">MATLAB</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Awards Section -->
-  <section id="awards" class="py-20 bg-slate-900/40 border-y border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-6">
-      <span class="font-mono text-xs uppercase tracking-widest text-sky-400">Recognition</span>
-      <h2 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-10">Honors &amp; Awards</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-xs font-mono text-sky-400 mb-1">2026 • National Scholarship</div>
-          <h3 class="font-bold text-white">PTDA Scholarship Winner</h3>
-          <p class="text-xs text-slate-400 mt-1">Power Transmission Distributors Association — awarded to 1 of 8 recipients nationwide.</p>
-        </div>
-        <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-xs font-mono text-sky-400 mb-1">2024 – 2026 • Global Competition</div>
-          <h3 class="font-bold text-white">XPRIZE Wildfire Finalist</h3>
-          <p class="text-xs text-slate-400 mt-1">Top 5 of 350 teams worldwide; only high school team to qualify. Covered by 8+ major news networks.</p>
-        </div>
-        <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-xs font-mono text-sky-400 mb-1">2025 • Space Research</div>
-          <h3 class="font-bold text-white">Innovator of the Year</h3>
-          <p class="text-xs text-slate-400 mt-1">Quest for Space ISS Research Lab &amp; Quest Institute Honors Fellow; 2nd Place at ASGSR Conference.</p>
-        </div>
-        <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-xs font-mono text-sky-400 mb-1">2024 • World Championship</div>
-          <h3 class="font-bold text-white">3rd Place — VEX Robot Skills</h3>
-          <p class="text-xs text-slate-400 mt-1">2024 VEX World Championship Robot Skills 3rd Place &amp; State Championship Robot Skills Champion.</p>
-        </div>
-        <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-xs font-mono text-sky-400 mb-1">2021 – 2026 • 23 Total Awards</div>
-          <h3 class="font-bold text-white">VEX V5 Robotics Honors</h3>
-          <p class="text-xs text-slate-400 mt-1">2026 Regional Excellence Award, 6x Tournament Champion, 2x Design Award, 3x Innovate Award.</p>
-        </div>
-        <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div class="text-xs font-mono text-sky-400 mb-1">2023 • Machine Learning</div>
-          <h3 class="font-bold text-white">2nd Place — AWS DeepRacer</h3>
-          <p class="text-xs text-slate-400 mt-1">CIE Youth STEM Convention, Division B Autonomous Racing Competition.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Footer -->
-  <section id="contact" class="py-20 max-w-4xl mx-auto px-6 text-center">
-    <span class="font-mono text-xs uppercase tracking-widest text-sky-400">Get In Touch</span>
-    <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Let's Build Something Together</h2>
-    <p class="text-slate-400 mt-3 max-w-xl mx-auto text-sm">
-      I am actively seeking <strong class="text-slate-200">Summer 2027 Mechanical Engineering or Robotics Internships</strong>. Reach out via email or LinkedIn to chat about hardware, robotics, or open roles.
-    </p>
-    <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <a href="mailto:feliciaguo@cmu.edu" class="px-6 py-3 rounded-lg bg-sky-500 text-slate-950 font-semibold hover:bg-sky-400 transition">
-        feliciaguo@cmu.edu
-      </a>
-      <a href="https://linkedin.com/in/feliciarguo" target="_blank" class="px-6 py-3 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 font-semibold hover:border-sky-400 transition">
-        linkedin.com/in/feliciarguo
-      </a>
-    </div>
-    <p class="mt-14 text-xs text-slate-500 font-mono">
-      © 2026 Felicia Guo • Hosted on GitHub Pages • Pittsburgh, PA / San Jose, CA
-    </p>
-  </section>
-
-  <!-- Project Detail Modal -->
-  <div id="projectModal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 relative shadow-2xl">
-      <button id="closeModal" class="absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" aria-label="Close modal">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-      <div id="modalContent"></div>
+      <div class="modal-body" id="modalContent"></div>
     </div>
   </div>
 
   <script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-    });
-
-    // Project Data (Replace image placeholders with real paths like './assets/images/xprize.jpg')
-    const projects = [
-      {
-        id: 'xprize',
-        title: 'XPRIZE Wildfire Drone & Automated Base Station',
-        period: '2024 – 2026',
-        category: 'drones',
-        badge: 'Top 5 / 350 Worldwide',
-        summary: 'Autonomous drone wildfire suppression payload, stepper-motor gantry refilling station, and patent-pending fire-suppressing capsule.',
-        tags: ['Tarot X6', '3D Printing', 'Machining', 'Stepper Motors', 'CAD'],
-        accent: 'from-orange-500/20 to-red-500/20 border-orange-500/30 text-orange-300',
-        details: [
-          '<strong>Water/Foam Payload &amp; Self-Refilling System (2024–2025):</strong> Built an in-house Tarot X6 payload featuring a hexagonal-prism water tank, foam proportioner, and magnetic tubing interface using 3D-printed and machined parts.',
-          '<strong>Automated Gantry Base Station (2025):</strong> Designed a wooden-frame landing pad with a stepper-motor gantry system to locate the landed drone and automatically refill it with fire-extinguishing balls; integrated with partner Kaizen Aerospace\'s aircraft.',
-          '<strong>Fire-Suppressing Capsule (2026):</strong> Manufactured an in-house 3D-printed capsule frame storing fire retardant that disperses prior to ground impact (patent in process).',
-          '<strong>Impact:</strong> Only high school finalist in XPRIZE Wildfire; covered by 8+ news channels including NBC, CBS, GMA, Yahoo, and AccuWeather.'
-        ]
-      },
-      {
-        id: 'iss',
-        title: 'ISS Microgravity Microlabs (2 Orbital Launches)',
-        period: '2023 – 2025',
-        category: 'space',
-        badge: 'Launched to ISS',
-        summary: 'Two automated, waterproofed resin-printed microlabs launched to the International Space Station to study conductive foam and electrochemical cells.',
-        tags: ['CAD', 'Resin 3D Printing', 'Automation', 'Fluidics'],
-        accent: 'from-sky-500/20 to-indigo-500/20 border-sky-500/30 text-sky-300',
-        details: [
-          '<strong>Conductive Foam in Microgravity (2024–2025):</strong> Automated microlab designed to mix foam reagents in space; fully CAD-modeled, resin-printed, and waterproofed for spaceflight safety. Launched to ISS mid-2025; presented at 2024 ASGSR.',
-          '<strong>Galvanic &amp; Electrolytic Cells (2023–2024):</strong> Resin-printed chamber assembly with automated bidirectional water pumping to simulate galvanic and electrolytic cells in microgravity. Launched early 2024; won 2nd Place at 2024 ASGSR.',
-          '<strong>Leadership:</strong> Led 4 workshops training 60 peers in experimental design and fabrication; awarded 2025 Innovator of the Year.'
-        ]
-      },
-      {
-        id: 'lunabotics',
-        title: 'Lunabotics Prototype Rover ("Tacobell")',
-        period: '2026',
-        category: 'space',
-        badge: 'CMU Moon Miners',
-        summary: '2/3-scale tracked prototype lunar rover built to evaluate drawbar pull and slippage across varying payload weights.',
-        tags: ['Tracked Drivetrain', '3D Printing', 'CAD', 'Drawbar Testing'],
-        accent: 'from-purple-500/20 to-fuchsia-500/20 border-purple-500/30 text-purple-300',
-        details: [
-          '<strong>Prototype Architecture:</strong> Developed a 2/3-scale rover ("Tacobell") to test drawbar pull under varying weights and measure slippage with a custom 3D-printed track and gear/support wheel system.',
-          '<strong>Systems Engineering:</strong> Modeled drivetrain and chassis CAD assemblies under strict competition mass budgets.',
-          '<strong>Design Review:</strong> Presented mechanical architecture, trade studies, and manufacturing plans at Preliminary Design Review (PDR).'
-        ]
-      },
-      {
-        id: 'airlab',
-        title: 'Ruggedized ATV Modular Sensor Payloads',
-        period: '2026 – Present',
-        category: 'drones',
-        badge: 'CMU Airlab',
-        summary: 'Modular mechanical sensor mounts designed and fabricated for Rubicon Robotics ATVs operating in rugged off-road environments.',
-        tags: ['Modular CAD', 'Fabrication', 'Off-Road Testing', 'UAV/ATV'],
-        accent: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/30 text-emerald-300',
-        details: [
-          '<strong>Mechanical Design:</strong> Engineered modular sensor enclosures and mounting assemblies for Rubicon Robotics ATVs to survive vibration, dust, and impact during off-road field tests.',
-          '<strong>Operations:</strong> Serve as both Mechanical Engineer and Drone Pilot for field data collection and testing.'
-        ]
-      },
-      {
-        id: 'auv',
-        title: 'Underwater Tether Spool & Sensor Validation',
-        period: '2026 – Present',
-        category: 'robotics',
-        badge: 'TartanAUV',
-        summary: 'Custom waterproof tether spool redesign, subsea cable soldering, and perfboard sensor hardware validation for an autonomous underwater vehicle.',
-        tags: ['Waterproof Cabling', 'Soldering', 'Perfboard', 'KiCad/Altium'],
-        accent: 'from-cyan-500/20 to-blue-500/20 border-cyan-500/30 text-cyan-300',
-        details: [
-          '<strong>Tether &amp; Telemetry:</strong> Redesigned a custom tether spool and soldered waterproofed cabling to improve underwater telemetry reliability and streamline deployment.',
-          '<strong>Electronics Validation:</strong> Prototyped and soldered custom perfboard circuits to validate sensor hardware before committing to full PCB layout.'
-        ]
-      },
-      {
-        id: 'vex',
-        title: 'VEX VRC Competition Robots (5+ Builds)',
-        period: '2021 – 2026',
-        category: 'robotics',
-        badge: '3rd in World Skills',
-        summary: 'Five generations of high-performance competition robots with custom mechanisms and optimized autonomous routines.',
-        tags: ['C++ / Autonomous', 'CAD', 'Mechanism Design', '23 Awards'],
-        accent: 'from-amber-500/20 to-yellow-500/20 border-amber-500/30 text-amber-300',
-        details: [
-          '<strong>Full-Cycle Engineering:</strong> Directed mechanical design, fabrication, and autonomous code optimization across 5+ competition robots.',
-          '<strong>Awards:</strong> Earned 23 total awards including 2024 VEX World Championship Robot Skills 3rd Place, 2024 State Skills Champion, 2026 Regional Excellence Award, 6x Tournament Champion, 2x Design Award, and 3x Innovate Award.'
-        ]
-      }
-    ];
-
-    const grid = document.getElementById('projectsGrid');
-    const modal = document.getElementById('projectModal');
-    const modalContent = document.getElementById('modalContent');
-    const closeModal = document.getElementById('closeModal');
-
-    function renderProjects(filter = 'all') {
-      const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
-      grid.innerHTML = filtered.map(p => `
-        <article onclick="openProject('${p.id}')" class="group cursor-pointer rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-sky-400/60 overflow-hidden transition flex flex-col justify-between">
-          <div>
-            <!-- Blueprint Header / Media Placeholder -->
-            <div class="h-40 bg-gradient-to-br ${p.accent} border-b border-slate-800 p-5 flex flex-col justify-between relative overflow-hidden">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-0.5 rounded-full bg-slate-950/70 text-xs font-mono border border-white/10">${p.badge}</span>
-                <span class="text-xs font-mono text-slate-200/80">${p.period}</span>
-              </div>
-              <div class="text-xs font-mono text-slate-300/70 flex items-center gap-1.5">
-                <span>[Add CAD Render / Photo Here]</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-bold text-white group-hover:text-sky-400 transition">${p.title}</h3>
-              <p class="mt-2 text-sm text-slate-400 leading-relaxed">${p.summary}</p>
-            </div>
-          </div>
-          <div class="px-6 pb-6 pt-2 flex flex-wrap items-center justify-between gap-2">
-            <div class="flex flex-wrap gap-1.5">
-              ${p.tags.slice(0, 3).map(t => `<span class="px-2 py-0.5 rounded bg-slate-800 text-[11px] font-mono text-slate-300">${t}</span>`).join('')}
-            </div>
-            <span class="text-xs font-mono text-sky-400 group-hover:translate-x-1 transition">Details →</span>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    window.openProject = function(id) {
-      const p = projects.find(item => item.id === id);
-      if (!p) return;
-      modalContent.innerHTML = `
-        <div class="flex items-center gap-3 mb-2">
-          <span class="px-2.5 py-0.5 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-mono">${p.badge}</span>
-          <span class="text-xs font-mono text-slate-400">${p.period}</span>
-        </div>
-        <h3 class="text-2xl font-bold text-white">${p.title}</h3>
-        <div class="mt-4 flex flex-wrap gap-2">
-          ${p.tags.map(t => `<span class="px-2.5 py-1 rounded-md bg-slate-800 text-xs font-mono text-slate-200">${t}</span>`).join('')}
-        </div>
-        <div class="mt-6 space-y-3 text-sm text-slate-300 leading-relaxed">
-          ${p.details.map(d => `<p class="p-3.5 rounded-lg bg-slate-950/60 border border-slate-800">${d}</p>`).join('')}
-        </div>
-      `;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+    // 1. Interactive Exploded Diagram Callouts
+    const partDescriptions = {
+      prop: "1. Foam Proportioner — Mixes water with fire-suppressant concentrate before dispersal.",
+      tank: "2. Hexagonal-Prism Water Tank — Custom in-house 3D-printed & machined tank sized for the Tarot X6 airframe.",
+      coupling: "3. Magnetic Tubing Coupling — Self-aligning magnetic interface enabling rapid ground-station refills."
     };
+    const svgEl = document.getElementById("explodedSvg");
+    const partNote = document.getElementById("partNote");
+    const partBtns = document.querySelectorAll("#partControls button");
+    const svgParts = document.querySelectorAll("#explodedSvg .part");
+    const callouts = document.querySelectorAll("#explodedSvg .callout-group");
 
-    function hideModal() {
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
+    function setActivePart(partId) {
+      if (!partId) {
+        svgEl.classList.remove("has-active");
+        svgParts.forEach(p => p.classList.remove("active"));
+        partBtns.forEach(b => b.classList.remove("active"));
+        partNote.textContent = "Hover or select a component to inspect the Tarot X6 water payload assembly.";
+        return;
+      }
+      svgEl.classList.add("has-active");
+      svgParts.forEach(p => p.classList.toggle("active", p.dataset.part === partId));
+      partBtns.forEach(b => b.classList.toggle("active", b.dataset.part === partId));
+      partNote.textContent = partDescriptions[partId] || "";
     }
 
-    closeModal.addEventListener('click', hideModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideModal(); });
+    [...partBtns, ...svgParts, ...callouts].forEach(el => {
+      el.addEventListener("mouseenter", () => setActivePart(el.dataset.part));
+      el.addEventListener("focus", () => setActivePart(el.dataset.part));
+      el.addEventListener("click", () => setActivePart(el.dataset.part));
+    });
+    document.querySelector(".hero-fig").addEventListener("mouseleave", () => setActivePart(null));
 
-    // Filter logic
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => {
-          b.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono bg-slate-900 border border-slate-700 text-slate-300 hover:border-sky-400 transition';
+    // 2. Project Category Filtering
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project");
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const filter = btn.dataset.filter;
+        projectCards.forEach(card => {
+          const cats = card.dataset.category.split(" ");
+          const match = filter === "all" || cats.includes(filter);
+          card.classList.toggle("hidden", !match);
         });
-        btn.className = 'filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-mono bg-sky-500 text-slate-950 font-semibold transition';
-        renderProjects(btn.dataset.filter);
       });
     });
 
-    renderProjects('all');
+    // 3. Copy Email Button
+    const copyBtn = document.getElementById("copyEmailBtn");
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("feliciaguo@cmu.edu");
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => (copyBtn.textContent = "Copy Email"), 2000);
+      } catch {
+        window.location.href = "mailto:feliciaguo@cmu.edu";
+      }
+    });
+
+    // 4. Case Study Modal Data & Controller
+    const caseStudies = {
+      xprize: {
+        kicker: "XPRIZE Wildfire Competition // 2024 – 2026",
+        title: "Drone-Based Wildfire Suppression System",
+        lede: "In-house water-and-foam payload, automated stepper-motor refill gantry base station, and a patent-pending 3D-printed fire-suppressing capsule built for the XPRIZE Wildfire finals.",
+        facts: [
+          ["Team", "Team Wildfire Quest"],
+          ["Role", "Mechanical Team Lead & Remote Drone Pilot"],
+          ["Result", "Finalist (Top 5 of 350 teams worldwide; only high school team)"],
+          ["Partners", "Kaizen Aerospace, PowerUS (Dragon/xFold), SensoRy AI"]
+        ],
+        sections: [
+          {
+            heading: "Water Payload & Self-Refilling System (2024–2025)",
+            bullets: [
+              "Built a custom water-and-foam suppression payload for a Tarot X6 hexacopter using in-house 3D-printed and machined components.",
+              "Engineered a foam proportioner to convert carried water into fire-suppressing foam and a hexagonal-prism tank for compact payload packaging.",
+              "Designed a magnetic tubing coupling system that connects the drone to a ground refill unit for fast turnaround."
+            ]
+          },
+          {
+            heading: "Automated Refill Base Station (2025)",
+            bullets: [
+              "Constructed a wooden-frame base station equipped with a stepper-motor gantry to locate the landed drone on the pad and reload it with fire-extinguishing balls.",
+              "Integrated mechanical and operational interfaces directly with partner Kaizen Aerospace's drone platform."
+            ]
+          },
+          {
+            heading: "Fire-Suppressing Capsule (2026)",
+            bullets: [
+              "Manufactured an in-house 3D-printed capsule frame that stores fire retardant and disperses it before ground impact.",
+              "Currently in the patent filing process (detailed drawings withheld until filing is complete)."
+            ]
+          }
+        ],
+        gallery: [
+          ["assets/img/xprize-payload.jpg", "Water payload with hexagonal tank & foam proportioner"],
+          ["assets/img/xprize-base-station.jpg", "Wooden-frame base station with stepper-motor gantry"],
+          ["assets/img/xprize-testing.jpg", "Field flight testing"]
+        ]
+      },
+      iss: {
+        kicker: "Quest for Space ISS Research Lab // 2023 – 2025",
+        title: "Microgravity Experiments on the ISS",
+        lede: "Two automated, resin-printed microlabs designed, waterproofed, and launched to the International Space Station to study electrochemical cells and conductive foam in microgravity.",
+        facts: [
+          ["Lab", "Quest for Space ISS Research Lab"],
+          ["Role", "Program Manager, Mechanical Honors Fellow, Researcher"],
+          ["Launches", "Early 2024 & Mid-2025 (ISS)"],
+          ["Recognition", "2025 Innovator of the Year; 2nd Place at ASGSR 2024"]
+        ],
+        sections: [
+          {
+            heading: "Galvanic & Electrolytic Cells Microlab (Launched Early 2024)",
+            bullets: [
+              "Engineered a compact automated microlab with resin-printed chambers that pumps fluid bidirectionally to simulate both galvanic and electrolytic cell behavior in microgravity.",
+              "Presented initial research at ASGSR 2023; teammates presented flight findings at ASGSR 2024 and won 2nd place."
+            ]
+          },
+          {
+            heading: "Conductive Foam Development Microlab (Launched Mid-2025)",
+            bullets: [
+              "Designed an automated microlab in CAD to mix conductive foam portions autonomously on orbit.",
+              "Fabricated via resin 3D printing and waterproofed to meet strict spaceflight containment safety standards; presented at ASGSR 2024."
+            ]
+          },
+          {
+            heading: "Program Leadership",
+            bullets: [
+              "Led 4 hands-on workshops training 60 peers in experimental design, CAD, and fabrication.",
+              "Presented at two national American Society for Gravitational and Space Research (ASGSR) conferences with 200+ participants."
+            ]
+          }
+        ],
+        gallery: [
+          ["assets/img/iss-cells.jpg", "Galvanic & electrolytic cell microlab"],
+          ["assets/img/iss-foam.jpg", "Conductive foam microlab"],
+          ["assets/img/iss-asgsr.jpg", "Presenting at ASGSR national conference"]
+        ]
+      },
+      tacobell: {
+        kicker: "Carnegie Mellon Moon Miners // 2026",
+        title: "Lunabotics Prototype Rover (“Tacobell”)",
+        lede: "A two-thirds-scale prototype rover built to characterize drawbar pull under varying payloads and evaluate slippage of a 3D-printed tracked drivetrain and gear/support wheel system.",
+        facts: [
+          ["Team", "Carnegie Mellon Moon Miners"],
+          ["Role", "Mechanical Subteam Member"],
+          ["Scale", "2/3 Scale of Full Competition Rover"],
+          ["Hardware", "3D-Printed Tracks, Gear & Support Wheel System"]
+        ],
+        sections: [
+          {
+            heading: "Testing & Validation",
+            bullets: [
+              "Built the 2/3-scale prototype rover to run controlled drawbar pull tests across varying ballast weights.",
+              "Evaluated traction and track slippage of a 3D-printed track system paired with custom gear and support wheels."
+            ]
+          },
+          {
+            heading: "Drivetrain & Chassis Architecture",
+            bullets: [
+              "Modeled drivetrain and chassis CAD assemblies for both prototype and competition lunar rovers under strict mass budgets.",
+              "Presented mechanical architecture, trade studies, and manufacturing plans at Preliminary Design Review (PDR)."
+            ]
+          }
+        ],
+        gallery: [
+          ["assets/img/lunabotics-tracks.jpg", "3D-printed track system"],
+          ["assets/img/lunabotics-wheels.jpg", "Gear and support wheel assembly"],
+          ["assets/img/lunabotics-test.jpg", "Drawbar pull & slippage test setup"]
+        ]
+      },
+      airlab: {
+        kicker: "Carnegie Mellon Airlab // 2026 – Present",
+        title: "Rubicon ATV Modular Sensor Payloads",
+        lede: "Ruggedized, modular sensor mounting hardware engineered for autonomous off-road ATV field testing at Carnegie Mellon's Airlab.",
+        facts: [
+          ["Lab", "Carnegie Mellon Airlab"],
+          ["Role", "Mechanical Engineer & Drone Pilot"],
+          ["Platform", "Rubicon Robotics ATVs"],
+          ["Focus", "Modular Packaging & Off-Road Durability"]
+        ],
+        sections: [
+          {
+            heading: "Key Contributions",
+            bullets: [
+              "Designed and fabricated modular sensor payloads tailored to mount securely to Rubicon Robotics ATVs.",
+              "Engineered mechanical interfaces to withstand vibration, dust, and shock during rugged off-road autonomy tests."
+            ]
+          }
+        ],
+        gallery: [
+          ["assets/img/airlab-atv.jpg", "Modular sensor payload mounted for off-road testing"]
+        ]
+      },
+      auv: {
+        kicker: "TartanAUV // 2026 – Present",
+        title: "Underwater Tether Spool & Sensor Prototyping",
+        lede: "Mechanical and electrical hardware upgrades for CMU's autonomous underwater vehicle, improving tether deployment reliability and validating sensor electronics.",
+        facts: [
+          ["Team", "TartanAUV (CMU)"],
+          ["Role", "Electrical Subteam Member"],
+          ["Tools", "Altium, KiCad, EasyEDA, Soldering"],
+          ["Focus", "Waterproof Telemetry & Circuit Validation"]
+        ],
+        sections: [
+          {
+            heading: "Key Contributions",
+            bullets: [
+              "Redesigned a custom tether spool and soldered waterproofed cabling to improve underwater telemetry reliability and pool/field deployment.",
+              "Prototyped and soldered custom perfboard circuits to validate sensor hardware and signal integrity prior to final PCB layout."
+            ]
+          }
+        ],
+        gallery: [
+          ["assets/img/tartanauv.jpg", "Redesigned tether spool & waterproofed cabling"]
+        ]
+      },
+      vex: {
+        kicker: "VEX V5 Robotics Competition // 2021 – 2026",
+        title: "VEX V5 Competition Robotics",
+        lede: "Five seasons directing mechanical design, fabrication, gameplay strategy, and autonomous routines across 5+ competition robots.",
+        facts: [
+          ["Role", "Designer, Builder, Commander"],
+          ["World Finish", "3rd Place, 2024 World Championship Robot Skills"],
+          ["Total Awards", "23 Awards (6× Tournament Champion, 6× Skills Champion)"],
+          ["Other Honors", "2026 Regional Excellence, 2× Design, 3× Innovate"]
+        ],
+        sections: [
+          {
+            heading: "Engineering & Strategy",
+            bullets: [
+              "Directed mechanical design and construction of 5+ competition robots, balancing drivetrain speed, mechanism reliability, and rapid iteration.",
+              "Collaborated on match strategy and optimized autonomous code for consistent high-scoring Robot Skills runs.",
+              "Qualified for the VEX World Championship in both 2024 and 2025, winning State Championship Robot Skills Champion in 2024."
+            ]
+          }
+        ],
+        gallery: [
+          ["assets/img/vex-robot.jpg", "Competition VEX V5 robot"]
+        ]
+      }
+    };
+
+    const modal = document.getElementById("caseModal");
+    const modalKicker = document.getElementById("modalKicker");
+    const modalContent = document.getElementById("modalContent");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+    function openCaseStudy(id) {
+      const data = caseStudies[id];
+      if (!data) return;
+      modalKicker.textContent = data.kicker;
+
+      const factsHtml = data.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+      const sectionsHtml = data.sections.map(sec => `
+        <div class="modal-section">
+          <h3>${sec.heading}</h3>
+          <ul>${sec.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+        </div>
+      `).join("");
+      const galleryHtml = data.gallery && data.gallery.length ? `
+        <div class="modal-section">
+          <h3>Photos &amp; Media</h3>
+          <div class="modal-gallery">
+            ${data.gallery.map(([src, cap]) => `
+              <figure>
+                <div class="shot-frame" data-label="Add photo: ${src}">
+                  <img src="${src}" alt="${cap}" loading="lazy" onerror="this.remove()">
+                </div>
+                <figcaption>${cap}</figcaption>
+              </figure>
+            `).join("")}
+          </div>
+        </div>
+      ` : "";
+
+      modalContent.innerHTML = `
+        <h2 id="modalTitle">${data.title}</h2>
+        <p class="modal-lede">${data.lede}</p>
+        <dl class="modal-facts">${factsHtml}</dl>
+        ${sectionsHtml}
+        ${galleryHtml}
+      `;
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+      modal.querySelector(".modal").scrollTop = 0;
+      modalCloseBtn.focus();
+    }
+
+    function closeCaseStudy() {
+      modal.classList.remove("open");
+      document.body.classList.remove("modal-open");
+    }
+
+    document.querySelectorAll("[data-open]").forEach(el => {
+      el.addEventListener("click", () => openCaseStudy(el.dataset.open));
+    });
+    modalCloseBtn.addEventListener("click", closeCaseStudy);
+    modal.addEventListener("click", e => {
+      if (e.target === modal) closeCaseStudy();
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && modal.classList.contains("open")) closeCaseStudy();
+    });
   </script>
 </body>
 </html>
