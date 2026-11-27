@@ -648,6 +648,97 @@
       margin: 3px 0 8px;
     }
 
+    /* Featured News & Media Coverage */
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .press-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--ink);
+      border-radius: var(--radius);
+      padding: 22px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .press-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(14, 27, 42, 0.08);
+      border-color: var(--ink);
+      border-top-color: var(--red);
+    }
+    .press-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule-light);
+    }
+    .press-outlet {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--red-ink);
+    }
+    .press-type {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--alu);
+      color: var(--steel);
+      padding: 2px 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .press-card h3 {
+      font-size: 1.55rem;
+      line-height: 1.06;
+      margin-bottom: 10px;
+    }
+    .press-card h3 a {
+      text-decoration: none;
+    }
+    .press-card h3 a:hover {
+      color: var(--red-ink);
+    }
+    .press-card p {
+      font-size: 0.89rem;
+      color: var(--steel);
+      margin-bottom: 18px;
+    }
+    .press-links {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--rule-light);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+    }
+    .press-link {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--red-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .press-link:hover { color: var(--ink); }
+    .press-link::after { content: "↗"; transition: transform 0.15s ease; }
+    .press-link:hover::after { transform: translate(2px, -2px); }
+
     /* Contact Band */
     .contact h2 { color: var(--white); margin-bottom: 12px; }
     .contact .section-intro { color: #b8c4d0; margin-bottom: 24px; }
@@ -820,6 +911,7 @@
       .hero-grid,
       .project.flagship,
       .grid-3 { grid-template-columns: 1fr; }
+      .press-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .project.flagship .shot-frame {
         border-right: none;
         border-bottom: 1px solid var(--rule-light);
@@ -827,7 +919,8 @@
       }
     }
     @media (max-width: 720px) {
-      .projects-grid { grid-template-columns: 1fr; }
+      .projects-grid,
+      .press-grid { grid-template-columns: 1fr; }
       .roles > li { grid-template-columns: 1fr; gap: 4px; }
       .nav .wrap { padding-top: 10px; padding-bottom: 10px; }
     }
@@ -843,6 +936,7 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#press">Press</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a class="nav-cta" href="assets/FeliciaGuo_Resume.pdf" target="_blank" rel="noopener">Resume PDF</a></li>
       </ul>
@@ -1190,6 +1284,97 @@
               <p><strong>Coursework:</strong> AP Physics C (Mech &amp; E&amp;M), AP Calculus BC, Multivariable Calculus &amp; Linear Algebra (Dual Enrollment), AP CSA, PLTW Principles of Engineering.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== FEATURED NEWS & PRESS -->
+    <section class="band" id="press" aria-labelledby="press-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="press-h">Featured News &amp; Media</h2>
+          <p class="section-intro">Selected national broadcast and press coverage of Team Wildfire Quest’s run to the $11M XPRIZE Wildfire Finals.</p>
+        </div>
+
+        <div class="press-grid">
+          <!-- Good Morning America -->
+          <article class="press-card">
+            <div class="press-meta">
+              <span class="press-outlet">Good Morning America</span>
+              <span class="press-type">Broadcast &middot; Jan 2026</span>
+            </div>
+            <h3><a href="https://vimeo.com/1152947340/6fea630237?share=copy&amp;fl=sv&amp;fe=ci" target="_blank" rel="noopener">Team Wildfire Quest Featured on GMA</a></h3>
+            <p>National ABC broadcast spotlighting the only high school team advancing to the $11M XPRIZE Wildfire finals against professional engineering firms.</p>
+            <div class="press-links">
+              <a class="press-link" href="https://vimeo.com/1152947340/6fea630237?share=copy&amp;fl=sv&amp;fe=ci" target="_blank" rel="noopener">Watch Segment</a>
+            </div>
+          </article>
+
+          <!-- NBC Bay Area -->
+          <article class="press-card">
+            <div class="press-meta">
+              <span class="press-outlet">NBC Bay Area</span>
+              <span class="press-type">Article &amp; TV &middot; Oct 2025</span>
+            </div>
+            <h3><a href="https://www.nbcbayarea.com/news/local/bay-area-proud/san-jose-students-advance-in-xprize-competition-with-wildfire-firefighting-system/3973113/" target="_blank" rel="noopener">San Jose Students Advance in XPRIZE with Wildfire System</a></h3>
+            <p>Bay Area Proud feature and 5:00 PM newscast profiling the team’s autonomous drone-based wildfire detection and suppression hardware.</p>
+            <div class="press-links">
+              <a class="press-link" href="https://www.nbcbayarea.com/news/local/bay-area-proud/san-jose-students-advance-in-xprize-competition-with-wildfire-firefighting-system/3973113/" target="_blank" rel="noopener">Read Article</a>
+              <a class="press-link" href="https://vimeo.com/1132581225/c3ad51adb0?fl=ip&amp;fe=ec" target="_blank" rel="noopener">Watch Newscast</a>
+            </div>
+          </article>
+
+          <!-- AccuWeather -->
+          <article class="press-card">
+            <div class="press-meta">
+              <span class="press-outlet">AccuWeather</span>
+              <span class="press-type">Broadcast &middot; 2026</span>
+            </div>
+            <h3><a href="https://vimeo.com/1167490634/57c9cc6576?share=copy&amp;fl=sv&amp;fe=ci" target="_blank" rel="noopener">AccuWeather Coverage of XPRIZE Wildfire Quest</a></h3>
+            <p>National weather network segment examining how the student-built drone and rapid-refill platform aims to detect and suppress wildfires within minutes.</p>
+            <div class="press-links">
+              <a class="press-link" href="https://vimeo.com/1167490634/57c9cc6576?share=copy&amp;fl=sv&amp;fe=ci" target="_blank" rel="noopener">Watch Segment</a>
+            </div>
+          </article>
+
+          <!-- CBS KPIX -->
+          <article class="press-card">
+            <div class="press-meta">
+              <span class="press-outlet">CBS News Bay Area (KPIX)</span>
+              <span class="press-type">Broadcast &middot; Mar 2026</span>
+            </div>
+            <h3><a href="https://vimeo.com/1171877775/eab58fa16b?share=copy&amp;fl=sv&amp;fe=ci" target="_blank" rel="noopener">XPRIZE Wildfire Quest with Mary Lee</a></h3>
+            <p>CBS KPIX television feature highlighting the team’s autonomous firefighting drones and preparations ahead of the final field tests.</p>
+            <div class="press-links">
+              <a class="press-link" href="https://vimeo.com/1171877775/eab58fa16b?share=copy&amp;fl=sv&amp;fe=ci" target="_blank" rel="noopener">Watch Segment</a>
+            </div>
+          </article>
+
+          <!-- XPRIZE Official -->
+          <article class="press-card">
+            <div class="press-meta">
+              <span class="press-outlet">XPRIZE Official</span>
+              <span class="press-type">Announcement</span>
+            </div>
+            <h3><a href="https://www.xprize.org/news/meet-the-future-of-autonomous-wildfire-response-xprize-wildfire-announces-finalist-teams-advancing-in-11m-competition" target="_blank" rel="noopener">XPRIZE Announces Finalist Teams in $11M Competition</a></h3>
+            <p>Official XPRIZE press release naming Team Wildfire Quest among the top 5 global finalists selected from 350 competing teams worldwide.</p>
+            <div class="press-links">
+              <a class="press-link" href="https://www.xprize.org/news/meet-the-future-of-autonomous-wildfire-response-xprize-wildfire-announces-finalist-teams-advancing-in-11m-competition" target="_blank" rel="noopener">Read Release</a>
+            </div>
+          </article>
+
+          <!-- Yahoo Finance -->
+          <article class="press-card">
+            <div class="press-meta">
+              <span class="press-outlet">Yahoo Finance</span>
+              <span class="press-type">Article</span>
+            </div>
+            <h3><a href="https://finance.yahoo.com/news/meet-future-autonomous-wildfire-response-110000692.html" target="_blank" rel="noopener">Meet the Future of Autonomous Wildfire Response</a></h3>
+            <p>National business and technology coverage detailing the finalist teams and next-generation autonomous wildfire mitigation systems.</p>
+            <div class="press-links">
+              <a class="press-link" href="https://finance.yahoo.com/news/meet-future-autonomous-wildfire-response-110000692.html" target="_blank" rel="noopener">Read Article</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
