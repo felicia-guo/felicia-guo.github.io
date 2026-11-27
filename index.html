@@ -34,6 +34,9 @@
       --red-ink: #a8221a;
       --red-light: #ff8f80;
 
+      /* Headshot crop focus (horizontal% vertical%) — keeps face & headroom centered */
+      --headshot-focus: 50% 20%;
+
       --display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
       --text: "B612", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -184,8 +187,8 @@
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.85fr);
-      gap: clamp(32px, 5vw, 64px);
+      grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.8fr);
+      gap: clamp(32px, 5vw, 56px);
       align-items: center;
     }
     .eyebrow {
@@ -289,8 +292,11 @@
     }
     .proof strong { color: var(--ink); }
 
-    /* Hero Profile / Snapshot Card */
+    /* Hero Profile / Headshot Card */
     .hero-card {
+      width: 100%;
+      max-width: 360px;
+      justify-self: end;
       margin: 0;
       background: var(--paper);
       border: 1px solid var(--rule);
@@ -312,14 +318,18 @@
       background: var(--white);
     }
     .hero-photo {
-      aspect-ratio: 3 / 4;
+      aspect-ratio: 4 / 5;
       cursor: default;
       border-bottom: 1px solid var(--rule-light);
     }
+    .hero-photo img {
+      object-fit: cover;
+      object-position: var(--headshot-focus);
+    }
     .hero-specs {
-      padding: 18px 20px 20px;
+      padding: 16px 20px 18px;
       display: grid;
-      gap: 12px;
+      gap: 10px;
       margin: 0;
     }
     .hero-specs div {
@@ -327,7 +337,7 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 12px;
-      padding-bottom: 10px;
+      padding-bottom: 9px;
       border-bottom: 1px solid var(--rule-light);
     }
     .hero-specs div:last-child {
@@ -344,7 +354,7 @@
     }
     .hero-specs dd {
       margin: 0;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
       color: var(--ink);
       text-align: right;
@@ -911,6 +921,10 @@
       .hero-grid,
       .project.flagship,
       .grid-3 { grid-template-columns: 1fr; }
+      .hero-card {
+        max-width: 380px;
+        justify-self: center;
+      }
       .press-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .project.flagship .shot-frame {
         border-right: none;
@@ -971,8 +985,8 @@
             <span>PROFILE // HARDWARE &amp; ROBOTICS</span>
             <span>CMU &rsquo;30</span>
           </div>
-          <div class="shot-frame hero-photo" data-label="Add photo: assets/img/headshot.jpeg (headshot or favorite build)">
-            <img src="assets/img/headshot.jpeg" alt="Felicia Guo with engineering hardware" onerror="this.remove()">
+          <div class="shot-frame hero-photo" data-label="Add photo: assets/img/headshot.jpeg">
+            <img src="assets/img/headshot.jpeg" alt="Headshot of Felicia Guo" onerror="this.remove()">
           </div>
           <dl class="hero-specs">
             <div><dt>Current Labs</dt><dd>Airlab &middot; Moon Miners &middot; TartanAUV</dd></div>
