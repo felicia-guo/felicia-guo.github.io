@@ -1,8 +1,8 @@
 <!--
   GitHub Profile README
   To display this on your GitHub profile, place it in a PUBLIC repository named
-  exactly after your GitHub username: YOUR-USERNAME/YOUR-USERNAME
-  Before committing, find-and-replace "YOUR-USERNAME" with your actual GitHub username.
+  exactly after your GitHub username: felicia-guo/felicia-guo
+  Before committing, find-and-replace "felicia-guo" with your actual GitHub username.
 -->
 
 <div align="center">
@@ -17,8 +17,8 @@ Designing, fabricating, and field-testing drones, planetary rovers, underwater t
 
 <br>
 
-[Portfolio](https://YOUR-USERNAME.github.io) &nbsp;&middot;&nbsp;
-[Resume (PDF)](https://YOUR-USERNAME.github.io/assets/FeliciaGuo_Resume.pdf) &nbsp;&middot;&nbsp;
+[Portfolio](https://felicia-guo.github.io) &nbsp;&middot;&nbsp;
+[Resume (PDF)](https://felicia-guo.github.io/assets/FeliciaGuo_Resume.pdf) &nbsp;&middot;&nbsp;
 [LinkedIn](https://linkedin.com/in/feliciarguo) &nbsp;&middot;&nbsp;
 [Email](mailto:feliciaguo@cmu.edu)
 
@@ -47,12 +47,12 @@ I am an undergraduate mechanical engineering student at Carnegie Mellon Universi
 
 | Project | Overview | Role |
 | :--- | :--- | :--- |
-| [**Wildfire Suppression Drone System**](https://YOUR-USERNAME.github.io/#projects)<br><sub>XPRIZE Wildfire &middot; 2024–2026</sub> | Tarot X6 water-and-foam payload, automated stepper-motor refill gantry base station, and patent-pending 3D-printed fire-suppressing capsule. **Top 5 of 350 teams globally.** | Mechanical Team Lead &amp; Remote Drone Pilot |
-| [**ISS Microgravity Experiments**](https://YOUR-USERNAME.github.io/#projects)<br><sub>Quest for Space &middot; 2023–2025</sub> | Two automated, resin-printed, waterproofed microlabs launched to the International Space Station (2024 &amp; 2025) studying electrochemical cells and conductive foam. | Program Manager &amp; Mechanical Honors Fellow |
-| [**Lunabotics Prototype Rover (“Tacobell”)**](https://YOUR-USERNAME.github.io/#projects)<br><sub>CMU Moon Miners &middot; 2026–Present</sub> | Two-thirds-scale lunar rover testbed built to measure drawbar pull under varying loads and evaluate slippage across 3D-printed tracks and gear/support wheels. | Mechanical Subteam Member |
-| [**VEX V5 Competition Robotics**](https://YOUR-USERNAME.github.io/#projects)<br><sub>VEX Robotics &middot; 2021–2026</sub> | Directed mechanical design, fabrication, and autonomous routines across 5+ competition robots; earned **23 awards** including 3rd Place in World Championship Robot Skills. | Designer, Builder, Commander |
+| [**Wildfire Suppression Drone System**](https://felicia-guo.github.io/#projects)<br><sub>XPRIZE Wildfire &middot; 2024–2026</sub> | Tarot X6 water-and-foam payload, automated stepper-motor refill gantry base station, and patent-pending 3D-printed fire-suppressing capsule. **Top 5 of 350 teams globally.** | Mechanical Team Lead &amp; Remote Drone Pilot |
+| [**ISS Microgravity Experiments**](https://felicia-guo.github.io/#projects)<br><sub>Quest for Space &middot; 2023–2025</sub> | Two automated, resin-printed, waterproofed microlabs launched to the International Space Station (2024 &amp; 2025) studying electrochemical cells and conductive foam. | Program Manager &amp; Mechanical Honors Fellow |
+| [**Lunabotics Prototype Rover (“Tacobell”)**](https://felicia-guo.github.io/#projects)<br><sub>CMU Moon Miners &middot; 2026–Present</sub> | Two-thirds-scale lunar rover testbed built to measure drawbar pull under varying loads and evaluate slippage across 3D-printed tracks and gear/support wheels. | Mechanical Subteam Member |
+| [**VEX V5 Competition Robotics**](https://felicia-guo.github.io/#projects)<br><sub>VEX Robotics &middot; 2021–2026</sub> | Directed mechanical design, fabrication, and autonomous routines across 5+ competition robots; earned **23 awards** including 3rd Place in World Championship Robot Skills. | Designer, Builder, Commander |
 
-Full engineering case studies and photos are available on my [portfolio](https://YOUR-USERNAME.github.io/#projects).
+Full engineering case studies and photos are available on my [portfolio](https://felicia-guo.github.io/#projects).
 
 ---
 
