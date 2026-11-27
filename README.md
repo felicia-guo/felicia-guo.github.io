@@ -119,4 +119,4 @@ Full engineering case studies and photos are available on my [portfolio](https:/
 
 ### Contact
 
-The fastest way to reach me is [feliciaguo@cmu.edu](mailto:feliciaguo@cmu.edu). I am targeting a **Summer 2027 mechanical or robotics engineering internship** and am always glad to connect over drones, rovers, or spaceflight hardware.
+The fastest way to reach me is [feliciaguo@cmu.edu](mailto:feliciaguo@cmu.edu). I am targeting a **Summer 2027 mechanical or robotics engineering internship** and am always glad to connect over drones, rovers, or manufacturing.
